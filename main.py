@@ -1,6 +1,5 @@
 import sys
 import threading
-
 import mysql.connector
 from PySide2.QtWidgets import *
 import signInWithGoogle
@@ -123,12 +122,7 @@ class SignInApp(QStackedWidget):
 
 
 if __name__ == "__main__":
-    # Create the Qt Application
     app = QApplication(sys.argv)
-
-    # Create and show the main window
     mainWindow = SignInApp()
     mainWindow.show()
-
-    # Run the application's event loop
     sys.exit(app.exec_())
