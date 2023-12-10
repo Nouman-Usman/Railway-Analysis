@@ -383,6 +383,7 @@ QPushButton#Google_btn:hover {
 }
 QPushButton#UploadPic:hover {
 	background-color: rgb(208, 208, 208);
+	color: rgb(0, 0, 0);
 }</string>
     </property>
     <property name="text">
@@ -403,6 +404,7 @@ QPushButton#UploadPic:hover {
     </property>
     <property name="styleSheet">
      <string notr="true">image: url(:/images/upload.png);
+color: rgb(255, 0, 255);
 border-radius:10px</string>
     </property>
     <property name="frameShape">
@@ -422,7 +424,9 @@ border-radius:10px</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/images/profile.png);</string>
+     <string notr="true">border-image: url(:/images/profile.png);
+border-radius: 50%;
+background-position: center;</string>
     </property>
     <property name="text">
      <string/>

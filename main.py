@@ -149,11 +149,9 @@ class SignInApp(QStackedWidget):
             print(f"Error: {err}")
 
     def show_signup_form(self, event):
-        # Switch to the sign-up form
         self.setCurrentIndex(1)
 
     def show_signin_form(self, event):
-        # Switch to the sign-in form
         self.setCurrentIndex(0)
 
 
