@@ -5,7 +5,9 @@ from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
-
+import hashlib
+import bcrypt
+import secrets
 
 class SignInApp(QStackedWidget):
     def __init__(self):

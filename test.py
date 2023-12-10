@@ -1,52 +1,48 @@
-from flask import Flask, redirect, url_for, session, request
-from flask_oauthlib.client import OAuth
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QFileDialog
+from PyQt5.QtGui import QPixmap
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'my_secret_key'
-oauth = OAuth(app)
 
-# Replace these values with your own client ID and client secret from Google Developer Console
-google = oauth.remote_app(
-    'google',
-    consumer_key='1001459857047-h269q1pgg1k51dhchebpu1vcr1qtc09o.apps".googleusercontent.com',
-    consumer_secret='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',
-    request_token_params={
-        'scope': 'https://www.googleapis.com/auth/userinfo.profile'
-    },
-    base_url='https://www.googleapis.com/oauth2/v1/',
-    request_token_url=None,
-    access_token_method='POST',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-)
+class ProfilePicUploader(QWidget):
+    def __init__(self):
+        super().__init__()
 
-@app.route('/')
-def index():
-    if 'google_token' in session:
-        me = google.get('userinfo')
-        return f"Hello, {me.data['name']}! <a href='/logout'>Logout</a>"
-    else:
-        return '<a href="/login">Google Login</a>'
+        self.init_ui()
 
-@app.route('/login')
-def login():
-    return google.authorize(callback=url_for('authorized', _external=True))
+    def init_ui(self):
+        self.setWindowTitle('Profile Picture Uploader')
 
-@app.route('/logout')
-def logout():
-    session.pop('google_token', None)
-    return redirect(url_for('index'))
+        self.profile_label = QLabel('No Image Selected')
+        self.profile_image = QLabel(self)
+        self.profile_image.setPixmap(QPixmap('default_profile_pic.png'))  # Set a default image
 
-@app.route('/login/authorized')
-def authorized():
-    resp = google.authorized_response()
-    if resp is None:
-        return 'Access denied: reason=%s error=%s' % (
-            request.args['error_reason'],
-            request.args['error_description']
-        )
-    session['google_token'] = (resp['access_token'], '')
-    return redirect(url_for('index'))
+        self.upload_button = QPushButton('Upload Profile Picture', self)
+        self.upload_button.clicked.connect(self.show_dialog)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.profile_label)
+        layout.addWidget(self.profile_image)
+        layout.addWidget(self.upload_button)
+
+        self.setLayout(layout)
+
+    def show_dialog(self):
+        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home', 'Image files (*.jpg *.gif *.png)')
+
+        if fname[0]:
+            # Load the original image
+            original_pixmap = QPixmap(fname[0])
+
+            # Resize the image to a specific passport size (e.g., 2x2 inches)
+            passport_size_pixmap = original_pixmap.scaled(200, 200)
+            # Update the profile image
+            self.profile_image.setPixmap(passport_size_pixmap)
+            self.profile_label.setText('Image Selected: ' + fname[0])
+
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app = QApplication(sys.argv)
+    window = ProfilePicUploader()
+    window.setGeometry(100, 100, 400, 300)
+    window.show()
+    sys.exit(app.exec_())

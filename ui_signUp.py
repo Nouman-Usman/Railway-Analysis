@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signUpXAjEjg.ui'
+## Form generated from reading UI file 'ui_signUpeImWUV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -49,7 +49,7 @@ class Ui_SignUp(object):
         self.label_15.setStyleSheet(u"color:rbga(0,0,0,200)")
         self.pushButton_3 = QPushButton(self.widget)
         self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(220, 420, 361, 51))
+        self.pushButton_3.setGeometry(QRect(220, 490, 361, 51))
         font1 = QFont()
         font1.setFamily(u"Times New Roman")
         font1.setPointSize(14)
@@ -114,7 +114,7 @@ class Ui_SignUp(object):
         self.lineEdit_9.setEchoMode(QLineEdit.Password)
         self.LogIn = QLabel(self.widget)
         self.LogIn.setObjectName(u"LogIn")
-        self.LogIn.setGeometry(QRect(450, 540, 47, 21))
+        self.LogIn.setGeometry(QRect(450, 610, 47, 21))
         font4 = QFont()
         font4.setFamily(u"Times New Roman")
         self.LogIn.setFont(font4)
@@ -122,18 +122,18 @@ class Ui_SignUp(object):
         self.LogIn.setStyleSheet(u"color: rgb(0, 106, 181);")
         self.label = QLabel(self.widget)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(290, 540, 161, 20))
+        self.label.setGeometry(QRect(290, 610, 161, 20))
         self.label.setFont(font4)
         self.Google_frame = QFrame(self.widget)
         self.Google_frame.setObjectName(u"Google_frame")
-        self.Google_frame.setGeometry(QRect(230, 490, 31, 41))
+        self.Google_frame.setGeometry(QRect(230, 560, 31, 41))
         self.Google_frame.setStyleSheet(u"image: url(:/images/google-icon.png);\n"
 "border-radius:10px")
         self.Google_frame.setFrameShape(QFrame.StyledPanel)
         self.Google_frame.setFrameShadow(QFrame.Raised)
         self.Google_btn = QPushButton(self.widget)
         self.Google_btn.setObjectName(u"Google_btn")
-        self.Google_btn.setGeometry(QRect(220, 490, 361, 41))
+        self.Google_btn.setGeometry(QRect(220, 560, 361, 41))
         font5 = QFont()
         font5.setFamily(u"Times New Roman")
         font5.setPointSize(12)
@@ -153,6 +153,34 @@ class Ui_SignUp(object):
         self.frame.setStyleSheet(u"image: url(:/images/train4.png);")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
+        self.UploadPic = QPushButton(self.widget)
+        self.UploadPic.setObjectName(u"UploadPic")
+        self.UploadPic.setGeometry(QRect(379, 400, 191, 40))
+        self.UploadPic.setFont(font5)
+        self.UploadPic.setCursor(QCursor(Qt.PointingHandCursor))
+        self.UploadPic.setLayoutDirection(Qt.RightToLeft)
+        self.UploadPic.setStyleSheet(u"QPushButton#UploadPic{\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 170, 255);\n"
+"	border: 2px solid rgb(0, 0, 0);\n"
+"	border-radius:10px;\n"
+"	transition: all 1.0s ease-in-out;\n"
+"}\n"
+"QPushButton#UploadPic:hover {\n"
+"	background-color: rgb(208, 208, 208);\n"
+"}")
+        self.UploadIcon = QFrame(self.widget)
+        self.UploadIcon.setObjectName(u"UploadIcon")
+        self.UploadIcon.setGeometry(QRect(400, 400, 20, 40))
+        self.UploadIcon.setStyleSheet(u"image: url(:/images/upload.png);\n"
+"border-radius:10px")
+        self.UploadIcon.setFrameShape(QFrame.StyledPanel)
+        self.UploadIcon.setFrameShadow(QFrame.Raised)
+        self.label_2 = QLabel(self.widget)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(220, 410, 151, 30))
+        self.label_2.setStyleSheet(u"color: rgb(170, 0, 255);\n"
+"font: 12pt \"Perpetua\";")
         self.label_13.raise_()
         self.label_14.raise_()
         self.label_15.raise_()
@@ -166,6 +194,9 @@ class Ui_SignUp(object):
         self.Google_btn.raise_()
         self.Google_frame.raise_()
         self.frame.raise_()
+        self.UploadPic.raise_()
+        self.UploadIcon.raise_()
+        self.label_2.raise_()
 
         self.retranslateUi(SignUp)
 
@@ -185,5 +216,7 @@ class Ui_SignUp(object):
         self.LogIn.setText(QCoreApplication.translate("SignUp", u"Log In", None))
         self.label.setText(QCoreApplication.translate("SignUp", u"Already have an account?", None))
         self.Google_btn.setText(QCoreApplication.translate("SignUp", u"Sign In with Google", None))
+        self.UploadPic.setText(QCoreApplication.translate("SignUp", u"Upload File", None))
+        self.label_2.setText(QCoreApplication.translate("SignUp", u"Upload Pic Here:", None))
     # retranslateUi
 
