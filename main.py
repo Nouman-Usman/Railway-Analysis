@@ -58,7 +58,8 @@ class SignInApp(QStackedWidget):
             original_pixmap = QPixmap(fname[0])
             size = self.ui_signup.profilePic.size()
             passport_size_pixmap = original_pixmap.scaled(71, 61)
-            self.ui_signup.profilePic.clear()
+            self.ui_signup.profilePic.clearMask()
+            # self.ui_signup.profilePic.clear()
             self.ui_signup.profilePic.setPixmap(passport_size_pixmap)
             self.ui_signup.profilePic.setAutoFillBackground(False)
 
