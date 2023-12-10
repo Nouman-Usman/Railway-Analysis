@@ -1,7 +1,6 @@
 import sys
 import threading
 import mysql.connector
-from PyQt5.QtGui import QPalette, QColor
 from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
