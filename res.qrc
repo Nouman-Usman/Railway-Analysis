@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="images">
     <file>upload.png</file>
+    <file>profile.png</file>
     <file>train4.png</file>
     <file>train3.png</file>
     <file>train2.png</file>

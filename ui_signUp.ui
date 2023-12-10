@@ -409,21 +409,23 @@ border-radius:10px</string>
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QFrame" name="profile_pic">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>410</y>
-      <width>151</width>
-      <height>30</height>
+      <x>230</x>
+      <y>380</y>
+      <width>71</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(170, 0, 255);
-font: 12pt &quot;Perpetua&quot;;</string>
+     <string notr="true">border-image: url(:/images/profile.png);</string>
     </property>
-    <property name="text">
-     <string>Upload Pic Here:</string>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
    </widget>
    <zorder>label_13</zorder>
@@ -441,7 +443,7 @@ font: 12pt &quot;Perpetua&quot;;</string>
    <zorder>frame</zorder>
    <zorder>UploadPic</zorder>
    <zorder>UploadIcon</zorder>
-   <zorder>label_2</zorder>
+   <zorder>profile_pic</zorder>
   </widget>
  </widget>
  <resources>

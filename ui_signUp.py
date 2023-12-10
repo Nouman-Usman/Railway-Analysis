@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signUpeImWUV.ui'
+## Form generated from reading UI file 'ui_signUpiqrqoD.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -21,7 +21,7 @@ class Ui_SignUp(object):
     def setupUi(self, SignUp):
         if SignUp.objectName():
             SignUp.setObjectName(u"SignUp")
-        SignUp.resize(704, 800)
+        SignUp.resize(652, 800)
         self.widget = QWidget(SignUp)
         self.widget.setObjectName(u"widget")
         self.widget.setGeometry(QRect(40, -10, 700, 800))
@@ -171,16 +171,26 @@ class Ui_SignUp(object):
 "}")
         self.UploadIcon = QFrame(self.widget)
         self.UploadIcon.setObjectName(u"UploadIcon")
-        self.UploadIcon.setGeometry(QRect(400, 400, 20, 40))
+        self.UploadIcon.setEnabled(True)
+        self.UploadIcon.setGeometry(QRect(390, 400, 20, 40))
         self.UploadIcon.setStyleSheet(u"image: url(:/images/upload.png);\n"
 "border-radius:10px")
         self.UploadIcon.setFrameShape(QFrame.StyledPanel)
         self.UploadIcon.setFrameShadow(QFrame.Raised)
-        self.label_2 = QLabel(self.widget)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(220, 410, 151, 30))
-        self.label_2.setStyleSheet(u"color: rgb(170, 0, 255);\n"
-"font: 12pt \"Perpetua\";")
+        self.profile_pic = QFrame(self.widget)
+        self.profile_pic.setObjectName(u"profile_pic")
+        self.profile_pic.setGeometry(QRect(220, 380, 71, 71))
+        self.profile_pic.setMinimumSize(QSize(71, 71))
+        self.profile_pic.setMaximumSize(QSize(71, 71))
+        self.profile_pic.setAutoFillBackground(False)
+        self.profile_pic.setStyleSheet(u"border-image: url(:/images/profile.png);\n"
+"background-size: cover;\n"
+"background-position: center;\n"
+"overflow: hidden;\n"
+"border-radius: 50%;\n"
+"")
+        self.profile_pic.setFrameShape(QFrame.StyledPanel)
+        self.profile_pic.setFrameShadow(QFrame.Raised)
         self.label_13.raise_()
         self.label_14.raise_()
         self.label_15.raise_()
@@ -196,7 +206,7 @@ class Ui_SignUp(object):
         self.frame.raise_()
         self.UploadPic.raise_()
         self.UploadIcon.raise_()
-        self.label_2.raise_()
+        self.profile_pic.raise_()
 
         self.retranslateUi(SignUp)
 
@@ -217,6 +227,5 @@ class Ui_SignUp(object):
         self.label.setText(QCoreApplication.translate("SignUp", u"Already have an account?", None))
         self.Google_btn.setText(QCoreApplication.translate("SignUp", u"Sign In with Google", None))
         self.UploadPic.setText(QCoreApplication.translate("SignUp", u"Upload File", None))
-        self.label_2.setText(QCoreApplication.translate("SignUp", u"Upload Pic Here:", None))
     # retranslateUi
 
