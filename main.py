@@ -1,22 +1,19 @@
 import sys
 import threading
 import mysql.connector
+from PyQt5.QtGui import QPalette, QColor
+from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
+import hashlib
 import bcrypt
-import socket
-
-
-def get_ip_address():
-    try:
-        hostname = socket.gethostname()
-        ip_address = socket.gethostbyname(hostname)
-        return ip_address
-    except:
-        return "Error: Unable to get IP address"
-
+import secrets
+from PyQt5.QtCore import QSizeF
+from PyQt5.QtGui import QImage
+# from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtCore import Qt
 
 class SignInApp(QStackedWidget):
     def __init__(self):
@@ -49,8 +46,33 @@ class SignInApp(QStackedWidget):
         #         lineEdit_9.text() != ''):
         self.ui_signup.pushButton_3.clicked.connect(
             lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
-                                self.ui_signup.lineEdit_9.text()), self.ui_signup.UploadPic.text())
+                                self.ui_signup.lineEdit_9.text()))
+        self.ui_signup.UploadPic.clicked.connect(self.upload)
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
+
+    def upload(self):
+        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home', 'Image files (*.jpg *.gif *.png)')
+
+        if fname[0]:
+            # original_pixmap = QPixmap(fname[0])
+            frame_size = self.ui_signup.profile_pic.size()
+            frame_aspect_ratio = frame_size.width() / frame_size.height()
+            image = QImage(fname[0])
+            image_size = image.size()
+            image_aspect_ratio = image_size.width() / image_size.height()
+            if image_aspect_ratio > frame_aspect_ratio:
+                new_image_size = QSizeF(frame_size.height(), frame_size.width() / image_aspect_ratio)
+            else:
+                new_image_size = QSizeF(frame_size.height() * image_aspect_ratio, frame_size.height())
+            resized_image = image.scaled(new_image_size.toSize(), Qt.KeepAspectRatio)
+            resized_pixmap = QPixmap.fromImage(resized_image)  # Use fromImage method
+            self.ui_signup.profile_pic.setStyleSheet(
+                f"background-image: url({resized_pixmap.toImage()});"
+                "background-size: cover;"
+                "background-position: center;"
+                "overflow: hidden;"
+                "border-radius: 50%;"
+            )
 
     def connectDB(self):
         host = "127.0.0.1"
