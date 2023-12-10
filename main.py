@@ -6,9 +6,17 @@ from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
-import hashlib
 import bcrypt
-import secrets
+import socket
+
+
+def get_ip_address():
+    try:
+        hostname = socket.gethostname()
+        ip_address = socket.gethostbyname(hostname)
+        return ip_address
+    except:
+        return "Error: Unable to get IP address"
 
 
 class SignInApp(QStackedWidget):
@@ -35,12 +43,14 @@ class SignInApp(QStackedWidget):
         # Connect signals to slots
         self.ui_signin.CreateAcc.mousePressEvent = self.show_signup_form
         self.ui_signup.LogIn.mousePressEvent = self.show_signin_form
+        # if self.ui_signin.lineEdit_7.text() != '' and self.ui_signin.lineEdit_9.text() != '':
         self.ui_signin.pushButton.clicked.connect(
             lambda: self.check(self.ui_signin.lineEdit_7.text(), self.ui_signin.lineEdit_9.text()))
-        if self.ui_signup.lineEdit_8.text() != '' and self.ui_signup.lineEdit_7.text() != '' and self.ui_signup.lineEdit_9.text() != '':
-            self.ui_signup.pushButton_3.clicked.connect(
-                lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
-                                    self.ui_signup.lineEdit_9.text()))
+        # if (self.ui_signup.lineEdit_8.text() != '' and self.ui_signup.lineEdit_7.text() != '' and self.ui_signup.
+        #         lineEdit_9.text() != ''):
+        self.ui_signup.pushButton_3.clicked.connect(
+            lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
+                                self.ui_signup.lineEdit_9.text()), self.ui_signup.UploadPic.text())
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
 
     def connectDB(self):
@@ -77,17 +87,20 @@ class SignInApp(QStackedWidget):
 
             # SQL statement to check if the user exists
             check_user_query = """
-                    SELECT * FROM signup
-                    WHERE (username = %s AND password = %s )
-                """
-            user_data = (username, password)
+                            SELECT * FROM signup
+                            WHERE (username = %s )
+                        """
+            user_data = (username,)
             cursor.execute(check_user_query, user_data)
             result = cursor.fetchone()
-
             if result:
-                print(f"User {username} signed in successfully!")
+                # Check if the password entered by the user matches the hashed password stored in the database
+                if bcrypt.checkpw(password.encode('utf-8'), result[2].encode('utf-8')):
+                    print(f"User {username} signed in successfully!")
+                else:
+                    print("Invalid username or password")
             else:
-                print("Invalid username or password")
+                print("Record Invalid")
 
         except mysql.connector.Error as err:
             # Handle errors appropriately in your application
