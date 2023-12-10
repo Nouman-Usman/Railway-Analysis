@@ -1,6 +1,7 @@
 import sys
 import threading
 import mysql.connector
+from PyQt5.QtGui import QPalette, QColor
 from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
@@ -8,6 +9,7 @@ from ui_signUp import Ui_SignUp
 import hashlib
 import bcrypt
 import secrets
+
 
 class SignInApp(QStackedWidget):
     def __init__(self):
@@ -35,9 +37,10 @@ class SignInApp(QStackedWidget):
         self.ui_signup.LogIn.mousePressEvent = self.show_signin_form
         self.ui_signin.pushButton.clicked.connect(
             lambda: self.check(self.ui_signin.lineEdit_7.text(), self.ui_signin.lineEdit_9.text()))
-        self.ui_signup.pushButton_3.clicked.connect(
-            lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
-                                self.ui_signup.lineEdit_9.text()))
+        if self.ui_signup.lineEdit_8.text() != '' and self.ui_signup.lineEdit_7.text() != '' and self.ui_signup.lineEdit_9.text() != '':
+            self.ui_signup.pushButton_3.clicked.connect(
+                lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
+                                    self.ui_signup.lineEdit_9.text()))
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
 
     def connectDB(self):
@@ -92,23 +95,33 @@ class SignInApp(QStackedWidget):
 
     def signup(self, username, email, password):
         try:
+            # if username.text() = '' or
             self.connectDB()
             if email.__contains__('@'):
                 print('Email is verified')
                 cursor = self.db.cursor()
-
+                hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
                 # SQL statement to insert a new user
                 insert_user_query = """
                     INSERT INTO signup (username, password, email)
                     VALUES (%s, %s, %s)
                 """
-                user_data = (username, password, email)
+                user_data = (username, hashed_password, email)
                 cursor.execute(insert_user_query, user_data)
                 self.db.commit()
 
                 print(f"User {username} signed up successfully!")
             else:
-                print('Please enter correct email address')
+                self.ui_signup.lineEdit_8.setText('')
+                self.ui_signup.lineEdit_8.setFocus()
+                self.ui_signup.lineEdit_8.setStyleSheet(
+                    'background-color: rgba(0, 0, 0, 0); '
+                    'border: none; '
+                    'border-bottom: 2px solid rgba(46, 82, 101, 200); '
+                    'color: rgb(255, 0, 0);'
+                    'padding-bottom: 7px;'
+                )
+                self.ui_signup.lineEdit_8.setPlaceholderText('Enter Correct Email')
         except mysql.connector.Error as err:
             print(f"Error: {err}")
 
