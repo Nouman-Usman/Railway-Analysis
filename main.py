@@ -15,7 +15,6 @@ class SignInApp(QStackedWidget):
         self.ui_signin = Ui_SignIn()
         self.ui_signup = Ui_SignUp()
         self.resize(704, 800)
-        # Create placeholder widgets to contain the forms
         self.widget_signin = QWidget()
         self.widget_signup = QWidget()
 
@@ -57,7 +56,6 @@ class SignInApp(QStackedWidget):
                                 password VARCHAR(255) NOT NULL
                             )
                         """)
-                # print("Connected successfully and tables created.")
         except mysql.connector.Error as err:
             print(f"Error: {err}")
 
