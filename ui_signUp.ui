@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>704</width>
+    <width>652</width>
     <height>800</height>
    </rect>
   </property>
@@ -390,9 +390,12 @@ QPushButton#UploadPic:hover {
     </property>
    </widget>
    <widget class="QFrame" name="UploadIcon">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>390</x>
       <y>400</y>
       <width>20</width>
       <height>40</height>
@@ -409,23 +412,20 @@ border-radius:10px</string>
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QFrame" name="profile_pic">
+   <widget class="QLabel" name="profilePic">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>380</y>
+      <x>220</x>
+      <y>390</y>
       <width>71</width>
-      <height>71</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">border-image: url(:/images/profile.png);</string>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <zorder>label_13</zorder>
@@ -443,7 +443,7 @@ border-radius:10px</string>
    <zorder>frame</zorder>
    <zorder>UploadPic</zorder>
    <zorder>UploadIcon</zorder>
-   <zorder>profile_pic</zorder>
+   <zorder>profilePic</zorder>
   </widget>
  </widget>
  <resources>

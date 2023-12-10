@@ -15,6 +15,7 @@ from PyQt5.QtGui import QImage
 # from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import Qt
 
+
 class SignInApp(QStackedWidget):
     def __init__(self):
         super().__init__()
@@ -51,28 +52,15 @@ class SignInApp(QStackedWidget):
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
 
     def upload(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open file', '/home', 'Image files (*.jpg *.gif *.png)')
+        fname = QFileDialog.getOpenFileName(self, 'Open file', '/upload', 'Image files (*.jpg *.gif *.png *jpeg)')
 
         if fname[0]:
-            # original_pixmap = QPixmap(fname[0])
-            frame_size = self.ui_signup.profile_pic.size()
-            frame_aspect_ratio = frame_size.width() / frame_size.height()
-            image = QImage(fname[0])
-            image_size = image.size()
-            image_aspect_ratio = image_size.width() / image_size.height()
-            if image_aspect_ratio > frame_aspect_ratio:
-                new_image_size = QSizeF(frame_size.height(), frame_size.width() / image_aspect_ratio)
-            else:
-                new_image_size = QSizeF(frame_size.height() * image_aspect_ratio, frame_size.height())
-            resized_image = image.scaled(new_image_size.toSize(), Qt.KeepAspectRatio)
-            resized_pixmap = QPixmap.fromImage(resized_image)  # Use fromImage method
-            self.ui_signup.profile_pic.setStyleSheet(
-                f"background-image: url({resized_pixmap.toImage()});"
-                "background-size: cover;"
-                "background-position: center;"
-                "overflow: hidden;"
-                "border-radius: 50%;"
-            )
+            original_pixmap = QPixmap(fname[0])
+            size = self.ui_signup.profilePic.size()
+            passport_size_pixmap = original_pixmap.scaled(71, 61)
+            self.ui_signup.profilePic.clear()
+            self.ui_signup.profilePic.setPixmap(passport_size_pixmap)
+            self.ui_signup.profilePic.setAutoFillBackground(False)
 
     def connectDB(self):
         host = "127.0.0.1"

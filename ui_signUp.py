@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signUpiqrqoD.ui'
+## Form generated from reading UI file 'ui_signUpCimrhx.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -177,20 +177,12 @@ class Ui_SignUp(object):
 "border-radius:10px")
         self.UploadIcon.setFrameShape(QFrame.StyledPanel)
         self.UploadIcon.setFrameShadow(QFrame.Raised)
-        self.profile_pic = QFrame(self.widget)
-        self.profile_pic.setObjectName(u"profile_pic")
-        self.profile_pic.setGeometry(QRect(220, 380, 71, 71))
-        self.profile_pic.setMinimumSize(QSize(71, 71))
-        self.profile_pic.setMaximumSize(QSize(71, 71))
-        self.profile_pic.setAutoFillBackground(False)
-        self.profile_pic.setStyleSheet(u"border-image: url(:/images/profile.png);\n"
-"background-size: cover;\n"
-"background-position: center;\n"
-"overflow: hidden;\n"
+        self.profilePic = QLabel(self.widget)
+        self.profilePic.setObjectName(u"profilePic")
+        self.profilePic.setGeometry(QRect(220, 390, 71, 61))
+        self.profilePic.setStyleSheet(u"border-image: url(:/images/profile.png);\n"
 "border-radius: 50%;\n"
-"")
-        self.profile_pic.setFrameShape(QFrame.StyledPanel)
-        self.profile_pic.setFrameShadow(QFrame.Raised)
+"background-position: center;")
         self.label_13.raise_()
         self.label_14.raise_()
         self.label_15.raise_()
@@ -206,7 +198,7 @@ class Ui_SignUp(object):
         self.frame.raise_()
         self.UploadPic.raise_()
         self.UploadIcon.raise_()
-        self.profile_pic.raise_()
+        self.profilePic.raise_()
 
         self.retranslateUi(SignUp)
 
@@ -227,5 +219,6 @@ class Ui_SignUp(object):
         self.label.setText(QCoreApplication.translate("SignUp", u"Already have an account?", None))
         self.Google_btn.setText(QCoreApplication.translate("SignUp", u"Sign In with Google", None))
         self.UploadPic.setText(QCoreApplication.translate("SignUp", u"Upload File", None))
+        self.profilePic.setText("")
     # retranslateUi
 
