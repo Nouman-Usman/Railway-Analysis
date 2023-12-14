@@ -44,6 +44,7 @@ class SignInApp(QStackedWidget):
                                 self.ui_signup.lineEdit_9.text()))
         self.ui_signup.UploadPic.clicked.connect(self.upload)
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
+        self.ui_signup.Google_btn.clicked.connect(self.googleSignIN)
 
     def upload(self):
         fname, _ = QFileDialog.getOpenFileName(self, 'Upload Picture', '/upload', 'Image files (*.png)')
@@ -83,6 +84,8 @@ class SignInApp(QStackedWidget):
     def googleSignIN(self):
         print('google')
         threading.Thread(target=signInWithGoogle.main).start()
+        if signInWithGoogle.MyRequestHandler:
+            print("User Signed In Successfully")
 
     def check(self, username, password):
         try:

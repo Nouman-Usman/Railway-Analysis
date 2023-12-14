@@ -10,6 +10,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 class MyRequestHandler(BaseHTTPRequestHandler):
     close_window_flag = False  # Class-level variable to indicate whether the window should be closed
+
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
         authorization_code = unquote(query_components.get('code', [''])[0])
@@ -18,8 +19,6 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-
-            # Send the HTML response with a button to launch the application
             response_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,13 +131,12 @@ def exchange_code_for_tokens(authorization_code):
         scopes=scopes,
         redirect_uri='http://localhost:8080'
     )
-
     try:
         # Fetch the token and return credentials
         flow.fetch_token(code=authorization_code)
         session = flow.authorized_session()
         file = session.get('https://www.googleapis.com/userinfo/v2/me').json()
-        print(file.get('name'))
+        name = file.get('name')
         print(session.get('https://www.googleapis.com/userinfo/v2/me').json())
         print('Successful User Authentication ')
         return True
