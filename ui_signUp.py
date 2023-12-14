@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signUpxtXvXM.ui'
+## Form generated from reading UI file 'ui_signUpNEAgfe.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -34,7 +34,7 @@ class Ui_SignUp(object):
 "border-top-left-radius: 50px;")
         self.label_14 = QLabel(self.widget)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(200, -100, 411, 651))
+        self.label_14.setGeometry(QRect(200, 30, 411, 651))
         self.label_14.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-bottom-right-radius: 50px;")
         self.label_15 = QLabel(self.widget)
@@ -182,11 +182,9 @@ class Ui_SignUp(object):
         self.profilePic = QLabel(self.widget)
         self.profilePic.setObjectName(u"profilePic")
         self.profilePic.setGeometry(QRect(220, 390, 71, 61))
-        self.profilePic.setStyleSheet(u"border-image: url(:/images/profile.png);\n"
+        self.profilePic.setStyleSheet(u"\n"
 "border-radius: 50%;\n"
-"background-position: center;\n"
-"background: transparent;\n"
-"")
+"background-position: center;")
         self.label_13.raise_()
         self.label_14.raise_()
         self.label_15.raise_()
@@ -215,13 +213,13 @@ class Ui_SignUp(object):
         self.label_14.setText("")
         self.label_15.setText(QCoreApplication.translate("SignUp", u"Create Account", None))
         self.pushButton_3.setText(QCoreApplication.translate("SignUp", u"Create Account", None))
-        self.label_18.setText(QCoreApplication.translate("SignUp", u"<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; font-style:italic;\">Anonymous</span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; font-style:italic;\">Analytics</span></p></body></html>", None))
+        self.label_18.setText(QCoreApplication.translate("SignUp", u"<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-style:italic;\">Railway</span></p><p align=\"center\"><span style=\" font-size:18pt; font-style:italic;\">Analysis</span></p></body></html>", None))
         self.lineEdit_7.setPlaceholderText(QCoreApplication.translate("SignUp", u"Username", None))
         self.lineEdit_8.setPlaceholderText(QCoreApplication.translate("SignUp", u"Email Adress", None))
         self.lineEdit_9.setPlaceholderText(QCoreApplication.translate("SignUp", u"Password", None))
         self.LogIn.setText(QCoreApplication.translate("SignUp", u"Log In", None))
         self.label.setText(QCoreApplication.translate("SignUp", u"Already have an account?", None))
-        self.Google_btn.setText(QCoreApplication.translate("SignUp", u"Sign In with Google", None))
+        self.Google_btn.setText(QCoreApplication.translate("SignUp", u"Continue with Google", None))
         self.UploadPic.setText(QCoreApplication.translate("SignUp", u"Upload File", None))
         self.profilePic.setText("")
     # retranslateUi

@@ -153,7 +153,7 @@ QPushButton#pushButton_3:pressed{
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic;&quot;&gt;Anonymous&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic;&quot;&gt;Analytics&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;Railway&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-style:italic;&quot;&gt;Analysis&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_7">
@@ -330,7 +330,7 @@ QPushButton#Google_btn:hover {
 }</string>
     </property>
     <property name="text">
-     <string>Sign In with Google</string>
+     <string>Continue with Google</string>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -424,7 +424,7 @@ border-radius:10px</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/images/profile.png);
+     <string notr="true">
 border-radius: 50%;
 background-position: center;</string>
     </property>

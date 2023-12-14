@@ -1,22 +1,19 @@
+import os
+import shutil
 import sys
 import threading
 import mysql.connector
-from PyQt5.QtGui import QPalette, QColor
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
 import bcrypt
-import secrets
-# from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtCore import Qt
 
 
 class SignInApp(QStackedWidget):
     def __init__(self):
         super().__init__()
-
         # Create instances of the UI forms
         self.ui_signin = Ui_SignIn()
         self.ui_signup = Ui_SignUp()
@@ -49,17 +46,19 @@ class SignInApp(QStackedWidget):
         self.ui_signin.Google_btn_2.clicked.connect(self.googleSignIN)
 
     def upload(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open file', '/upload', 'Image files (*.jpg *.gif *.png *jpeg)')
-
-        if fname[0]:
-            original_pixmap = QPixmap(fname[0])
+        fname, _ = QFileDialog.getOpenFileName(self, 'Upload Picture', '/upload', 'Image files (*.png)')
+        if fname:
+            self.ui_signup.profilePic.clear()
+            original_pixmap = QPixmap(fname)
             size = self.ui_signup.profilePic.size()
             passport_size_pixmap = original_pixmap.scaled(71, 61)
-            self.ui_signup.profilePic.clearMask()
-            # self.ui_signup.profilePic.clear()
             self.ui_signup.profilePic.setPixmap(passport_size_pixmap)
-            self.ui_signup.profilePic.setAutoFillBackground(False)
-            # self.ui_signup.profilePic.
+            self.ui_signup.profilePic.setAutoFillBackground(True)
+            destination_file_name = 'profile.png'
+            destination_path = os.path.join(os.getcwd(), destination_file_name)
+            shutil.copy(fname, destination_path)
+            print("File copied successfully.")
+
     def connectDB(self):
         host = "127.0.0.1"
         user = "root"
