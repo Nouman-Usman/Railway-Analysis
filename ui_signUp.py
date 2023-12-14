@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signUpCimrhx.ui'
+## Form generated from reading UI file 'ui_signUpxtXvXM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -34,7 +34,7 @@ class Ui_SignUp(object):
 "border-top-left-radius: 50px;")
         self.label_14 = QLabel(self.widget)
         self.label_14.setObjectName(u"label_14")
-        self.label_14.setGeometry(QRect(200, 30, 411, 651))
+        self.label_14.setGeometry(QRect(200, -100, 411, 651))
         self.label_14.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
 "border-bottom-right-radius: 50px;")
         self.label_15 = QLabel(self.widget)
@@ -168,12 +168,14 @@ class Ui_SignUp(object):
 "}\n"
 "QPushButton#UploadPic:hover {\n"
 "	background-color: rgb(208, 208, 208);\n"
+"	color: rgb(0, 0, 0);\n"
 "}")
         self.UploadIcon = QFrame(self.widget)
         self.UploadIcon.setObjectName(u"UploadIcon")
         self.UploadIcon.setEnabled(True)
         self.UploadIcon.setGeometry(QRect(390, 400, 20, 40))
         self.UploadIcon.setStyleSheet(u"image: url(:/images/upload.png);\n"
+"color: rgb(255, 0, 255);\n"
 "border-radius:10px")
         self.UploadIcon.setFrameShape(QFrame.StyledPanel)
         self.UploadIcon.setFrameShadow(QFrame.Raised)
@@ -182,7 +184,9 @@ class Ui_SignUp(object):
         self.profilePic.setGeometry(QRect(220, 390, 71, 61))
         self.profilePic.setStyleSheet(u"border-image: url(:/images/profile.png);\n"
 "border-radius: 50%;\n"
-"background-position: center;")
+"background-position: center;\n"
+"background: transparent;\n"
+"")
         self.label_13.raise_()
         self.label_14.raise_()
         self.label_15.raise_()

@@ -140,6 +140,7 @@ def exchange_code_for_tokens(authorization_code):
         file = session.get('https://www.googleapis.com/userinfo/v2/me').json()
         print(file.get('name'))
         print(session.get('https://www.googleapis.com/userinfo/v2/me').json())
+        print('Successful User Authentication ')
         return True
     except Exception as e:
         print(f"An error occurred during token exchange: {str(e)}")

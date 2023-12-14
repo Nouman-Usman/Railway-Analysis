@@ -7,11 +7,8 @@ from PySide2.QtWidgets import *
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
-import hashlib
 import bcrypt
 import secrets
-from PyQt5.QtCore import QSizeF
-from PyQt5.QtGui import QImage
 # from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtCore import Qt
 
@@ -62,7 +59,7 @@ class SignInApp(QStackedWidget):
             # self.ui_signup.profilePic.clear()
             self.ui_signup.profilePic.setPixmap(passport_size_pixmap)
             self.ui_signup.profilePic.setAutoFillBackground(False)
-
+            # self.ui_signup.profilePic.
     def connectDB(self):
         host = "127.0.0.1"
         user = "root"
