@@ -3,6 +3,7 @@ class Graph():
         self.V = vertices
         self.graph = [[0 for column in range(vertices)]
                       for row in range(vertices)]
+
     def printSolution(self, dist):
         print("Vertex \t Distance from Source")
         for node in range(self.V):
