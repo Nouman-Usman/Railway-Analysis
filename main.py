@@ -9,6 +9,7 @@ import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
 import bcrypt
+from DSA import *
 
 
 class SignInApp(QStackedWidget):
@@ -34,11 +35,8 @@ class SignInApp(QStackedWidget):
         # Connect signals to slots
         self.ui_signin.CreateAcc.mousePressEvent = self.show_signup_form
         self.ui_signup.LogIn.mousePressEvent = self.show_signin_form
-        # if self.ui_signin.lineEdit_7.text() != '' and self.ui_signin.lineEdit_9.text() != '':
         self.ui_signin.pushButton.clicked.connect(
             lambda: self.check(self.ui_signin.lineEdit_7.text(), self.ui_signin.lineEdit_9.text()))
-        # if (self.ui_signup.lineEdit_8.text() != '' and self.ui_signup.lineEdit_7.text() != '' and self.ui_signup.
-        #         lineEdit_9.text() != ''):
         self.ui_signup.pushButton_3.clicked.connect(
             lambda: self.signup(self.ui_signup.lineEdit_7.text(), self.ui_signup.lineEdit_8.text(),
                                 self.ui_signup.lineEdit_9.text()))
