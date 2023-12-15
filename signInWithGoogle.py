@@ -2,7 +2,6 @@ import json
 import subprocess
 import threading
 import webbrowser
-import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs, unquote
 from google_auth_oauthlib.flow import InstalledAppFlow

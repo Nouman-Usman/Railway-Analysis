@@ -5,11 +5,20 @@ import threading
 import mysql.connector
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
+
+from MainMenu.mainMenu1 import MainWindow
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
 import bcrypt
 from DSA import *
+
+
+# class MainWindow(QMainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.ui = MainMenu.main.MainWindow
+#         self.ui.setupUi(self)
 
 
 class SignInApp(QStackedWidget):
@@ -131,6 +140,10 @@ class SignInApp(QStackedWidget):
                 self.db.commit()
 
                 print(f"User {username} signed up successfully!")
+                self.close()
+                # MainWindow()
+                # print('Printed')
+                self.open_main_menu()
             else:
                 self.ui_signup.lineEdit_8.setText('')
                 self.ui_signup.lineEdit_8.setFocus()
@@ -150,6 +163,12 @@ class SignInApp(QStackedWidget):
 
     def show_signin_form(self, event):
         self.setCurrentIndex(0)
+
+    def open_main_menu(self):
+        # self.close()  # Hide the current widget (sign-in/sign-up)
+        print('Main Menu')
+        main_window = MainWindow()
+        main_window.show()
 
 
 if __name__ == "__main__":
