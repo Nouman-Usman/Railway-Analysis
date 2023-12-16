@@ -5,7 +5,6 @@ import threading
 import mysql.connector
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
-
 from MainMenu.mainMenu1 import MainWindow
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
