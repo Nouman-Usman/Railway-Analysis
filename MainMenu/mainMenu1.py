@@ -71,6 +71,7 @@ class MainWindow(QMainWindow):
         msg_box.setIcon(QMessageBox.Warning)
         msg_box.setWindowTitle(title)
         msg_box.setText(message)
+
         msg_box.exec_()
 
     def load_location_comboboxes(self):
