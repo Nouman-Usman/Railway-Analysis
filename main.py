@@ -2,6 +2,8 @@ import os
 import shutil
 import sys
 import threading
+import time
+
 import mysql.connector
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
@@ -77,10 +79,12 @@ class SignInApp(QStackedWidget):
 
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
-        print(signInWithGoogle.MyRequestHandler.close_window_flag)
-        if signInWithGoogle.MyRequestHandler.close_window_flag:
+        signInWithGoogle.MyRequestHandler.authentication_event.wait(timeout=12)
+        if  signInWithGoogle.MyRequestHandler.close_window_flag:
             print("Signed Up Successfully")
             self.open_main_menu("Nouman")
+        else:
+            print("Authentication failed or timed out")
 
     def check(self, username, password):
         try:
