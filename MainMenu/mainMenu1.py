@@ -1,6 +1,6 @@
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QPixmap
-from PySide2.QtWidgets import QMainWindow, QApplication, QMessageBox
+from PySide2.QtWidgets import QMainWindow, QMessageBox
 from MainMenu import ui_dialog, ui_error
 from MainMenu.graph import Graph
 from MainMenu.ui_function import UIFunction
@@ -10,8 +10,8 @@ import pandas as pd
 
 class MainWindow(QMainWindow):
     def __init__(self):
-
         super(MainWindow, self).__init__()
+        self.name12 = None
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         applicationName = "Railway Analysis"
@@ -38,6 +38,7 @@ class MainWindow(QMainWindow):
         self.ui.comboBox_TicketCount.currentIndexChanged.connect(self.update_label_amount)
         self.ui.start_Location.currentIndexChanged.connect(self.update_label_amount)
         self.ui.end_Location.currentIndexChanged.connect(self.update_label_amount)
+        print(self.name12)
         self.ui.User_Name.setText('Nouman')
         pixmap = QPixmap('Images/profile.png')
         self.ui.profilePic.setPixmap(pixmap)
@@ -120,6 +121,6 @@ def errorexec(self, heading, icon, btnOk):
 
 
 def build(app, name):
-    user_name = name
     window1 = MainWindow()
+    window1.name12 = name
     window1.show()
