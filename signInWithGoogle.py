@@ -1,4 +1,5 @@
 import json
+import sys
 import threading
 import time
 import webbrowser
@@ -91,6 +92,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 """
             self.wfile.write(response_content.encode())
             if ans:
+                self.close_window_flag = True
+                print('Nouman')
+                sys.exit()
                 self.server.shutdown()
                 return self.close_window_flag
         else:

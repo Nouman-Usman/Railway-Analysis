@@ -77,6 +77,7 @@ class SignInApp(QStackedWidget):
 
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
+        print(signInWithGoogle.MyRequestHandler.close_window_flag)
         if signInWithGoogle.MyRequestHandler.close_window_flag:
             print("Signed Up Successfully")
             self.open_main_menu("Nouman")
