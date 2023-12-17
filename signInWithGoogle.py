@@ -9,7 +9,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 class MyRequestHandler(BaseHTTPRequestHandler):
-    close_window_flag = False
+    close_window_flag = True
+    authentication_event = threading.Event()
 
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
@@ -91,14 +92,13 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
 """
             self.wfile.write(response_content.encode())
+            self.wfile.close()
             if ans:
                 self.close_window_flag = True
                 print('Nouman')
+                self.authentication_event.set()
                 self.server.shutdown()
-                # return self.close_window_flag
                 sys.exit()
-
-
         else:
             self.send_response(400)
             self.send_header('Content-type', 'text/html')
