@@ -94,9 +94,11 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             if ans:
                 self.close_window_flag = True
                 print('Nouman')
-                sys.exit()
                 self.server.shutdown()
-                return self.close_window_flag
+                # return self.close_window_flag
+                sys.exit()
+
+
         else:
             self.send_response(400)
             self.send_header('Content-type', 'text/html')
