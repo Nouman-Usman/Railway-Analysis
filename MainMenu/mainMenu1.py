@@ -42,7 +42,6 @@ class MainWindow(QMainWindow):
         pixmap = QPixmap('Images/profile.png')
         self.ui.profilePic.setPixmap(pixmap)
         self.ui.profilePic.setScaledContents(True)
-        self.ui.profilePic.setPixmap('profile.png')
 
         def moveWindow(event):
             if UIFunction.returStatus() == 1:
