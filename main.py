@@ -5,19 +5,11 @@ import threading
 import mysql.connector
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
-from MainMenu.mainMenu1 import MainWindow
+from MainMenu import mainMenu1
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
 import bcrypt
-from DSA import *
-
-
-# class MainWindow(QMainWindow):
-#     def __init__(self):
-#         super().__init__()
-#         self.ui = MainMenu.main.MainWindow
-#         self.ui.setupUi(self)
 
 
 class SignInApp(QStackedWidget):
@@ -29,13 +21,9 @@ class SignInApp(QStackedWidget):
         self.resize(704, 800)
         self.widget_signin = QWidget()
         self.widget_signup = QWidget()
-
-        # Set up the sign-in form
         self.ui_signin.setupUi(self.widget_signin)
-
         # Set up the sign-up form
         self.ui_signup.setupUi(self.widget_signup)
-
         # Add forms to the stacked widget
         self.addWidget(self.widget_signin)
         self.addWidget(self.widget_signup)
@@ -139,9 +127,7 @@ class SignInApp(QStackedWidget):
                 self.db.commit()
 
                 print(f"User {username} signed up successfully!")
-                self.close()
-                # MainWindow()
-                # print('Printed')
+                # self.close()
                 self.open_main_menu()
             else:
                 self.ui_signup.lineEdit_8.setText('')
@@ -164,10 +150,8 @@ class SignInApp(QStackedWidget):
         self.setCurrentIndex(0)
 
     def open_main_menu(self):
-        # self.close()  # Hide the current widget (sign-in/sign-up)
         print('Main Menu')
-        main_window = MainWindow()
-        main_window.show()
+        mainMenu1.build(SignInApp)
 
 
 if __name__ == "__main__":

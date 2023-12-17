@@ -1520,10 +1520,16 @@ QScrollBar::sub-page:vertical {
                    <height>10591</height>
                   </rect>
                  </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
-                   <width>1</width>
-                   <height>50</height>
+                   <width>1000</width>
+                   <height>600</height>
                   </size>
                  </property>
                  <property name="maximumSize">
@@ -1544,6 +1550,12 @@ border-radius:50px;</string>
                     <width>161</width>
                     <height>41</height>
                    </rect>
+                  </property>
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
                   </property>
                   <property name="font">
                    <font>
@@ -1655,32 +1667,136 @@ background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);</string>
                   </property>
                  </widget>
-                </widget>
-                <widget class="QLabel" name="label_16">
-                 <property name="geometry">
-                  <rect>
-                   <x>180</x>
-                   <y>280</y>
-                   <width>121</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Times New Roman</family>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(0, 0, 0);
+                 <widget class="QLabel" name="label_21">
+                  <property name="geometry">
+                   <rect>
+                    <x>160</x>
+                    <y>210</y>
+                    <width>121</width>
+                    <height>31</height>
+                   </rect>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Times New Roman</family>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(0, 0, 0);
 color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>Ticket Count:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
+                  </property>
+                  <property name="text">
+                   <string>Amount:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                 <widget class="QLabel" name="label_Amount">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="geometry">
+                   <rect>
+                    <x>300</x>
+                    <y>210</y>
+                    <width>151</width>
+                    <height>31</height>
+                   </rect>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>IBeamCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-radius:5px;
+background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                  </property>
+                  <property name="text">
+                   <string>00.00</string>
+                  </property>
+                  <property name="textFormat">
+                   <enum>Qt::PlainText</enum>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                 <widget class="QComboBox" name="comboBox_TicketCount">
+                  <property name="geometry">
+                   <rect>
+                    <x>660</x>
+                    <y>160</y>
+                    <width>161</width>
+                    <height>31</height>
+                   </rect>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">border-radius:5px;
+background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>2</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>3</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>4</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>5</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>6</string>
+                   </property>
+                  </item>
+                 </widget>
+                 <widget class="QLabel" name="label_16">
+                  <property name="geometry">
+                   <rect>
+                    <x>500</x>
+                    <y>160</y>
+                    <width>121</width>
+                    <height>31</height>
+                   </rect>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Times New Roman</family>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+                  </property>
+                  <property name="text">
+                   <string>Ticket Count:</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
                 </widget>
                 <widget class="QComboBox" name="comboBox_TicketType">
                  <property name="geometry">
@@ -1744,9 +1860,9 @@ color: rgb(255, 255, 255);</string>
                 <widget class="QLabel" name="label_22">
                  <property name="geometry">
                   <rect>
-                   <x>520</x>
+                   <x>500</x>
                    <y>280</y>
-                   <width>121</width>
+                   <width>141</width>
                    <height>31</height>
                   </rect>
                  </property>
@@ -1850,120 +1966,12 @@ color: rgb(255, 255, 255);</string>
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_21">
-                 <property name="geometry">
-                  <rect>
-                   <x>530</x>
-                   <y>230</y>
-                   <width>121</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Times New Roman</family>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>Amount:</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_Amount">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="geometry">
-                  <rect>
-                   <x>670</x>
-                   <y>230</y>
-                   <width>161</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="cursor">
-                  <cursorShape>IBeamCursor</cursorShape>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border-radius:5px;
-background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::PlainText</enum>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-                <widget class="QComboBox" name="comboBox_TicketCount">
-                 <property name="geometry">
-                  <rect>
-                   <x>310</x>
-                   <y>280</y>
-                   <width>151</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="cursor">
-                  <cursorShape>PointingHandCursor</cursorShape>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">border-radius:5px;
-background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>1</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>2</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>3</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>4</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>5</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>6</string>
-                  </property>
-                 </item>
-                </widget>
                 <zorder>widget</zorder>
                 <zorder>lab_Bug</zorder>
                 <zorder>label_18</zorder>
-                <zorder>label_21</zorder>
                 <zorder>label_14</zorder>
-                <zorder>label_16</zorder>
-                <zorder>comboBox_TicketCount</zorder>
                 <zorder>label_22</zorder>
                 <zorder>comboBox_TicketType</zorder>
-                <zorder>label_Amount</zorder>
                 <zorder>label_12</zorder>
                 <zorder>label_11</zorder>
                </widget>
