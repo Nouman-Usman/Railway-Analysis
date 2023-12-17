@@ -1,6 +1,6 @@
 import json
-import subprocess
 import threading
+import time
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs, unquote
@@ -8,12 +8,13 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 class MyRequestHandler(BaseHTTPRequestHandler):
-    close_window_flag = False  # Class-level variable to indicate whether the window should be closed
+    close_window_flag = False
 
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
         authorization_code = unquote(query_components.get('code', [''])[0])
         if authorization_code:
+            self.close_window_flag = True
             ans = exchange_code_for_tokens(authorization_code)
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
@@ -89,23 +90,15 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
 """
             self.wfile.write(response_content.encode())
-
-            # Check the flag and return accordingly
-            return ans if not self.close_window_flag else False
+            if ans:
+                self.server.shutdown()
+                return self.close_window_flag
         else:
-            self.send_response(400)  # Bad Request
+            self.send_response(400)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             self.wfile.write(b'Error: Authorization code not found.')
         return False
-
-
-def do_POST(self):
-    self.send_response(200)
-    self.send_header('Content-type', 'text/html')
-    self.end_headers()
-    subprocess.run('test.py')
-    self.wfile.write(b'Launching the application...')
 
 
 def start_local_server():
@@ -135,13 +128,17 @@ def exchange_code_for_tokens(authorization_code):
         flow.fetch_token(code=authorization_code)
         session = flow.authorized_session()
         file = session.get('https://www.googleapis.com/userinfo/v2/me').json()
-        name = file.get('name')
+        # name = file.get('name')
         print(session.get('https://www.googleapis.com/userinfo/v2/me').json())
         print('Successful User Authentication ')
         return True
     except Exception as e:
         print(f"An error occurred during token exchange: {str(e)}")
         return False
+
+
+def isSignIN():
+    pass
 
 
 def signInWithGoogle():
@@ -154,5 +151,8 @@ def signInWithGoogle():
 
 
 def main():
+    server_thread = threading.Thread(target=start_local_server)
+    server_thread.start()
+    time.sleep(2)
     signInWithGoogle()
-    threading.Thread(target=start_local_server())
+    server_thread.join()

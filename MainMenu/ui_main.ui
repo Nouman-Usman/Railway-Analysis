@@ -256,7 +256,7 @@ QPushButton:pressed {
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="lab_user">
+              <widget class="QLabel" name="User_Name">
                <property name="font">
                 <font>
                  <family>Segoe UI Light</family>
@@ -314,24 +314,13 @@ QPushButton:pressed {
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="lab_person">
-               <property name="maximumSize">
-                <size>
-                 <width>55</width>
-                 <height>55</height>
-                </size>
+              <widget class="QLabel" name="profilePic">
+               <property name="styleSheet">
+                <string notr="true">border-radius: 50%;
+background-position: center;</string>
                </property>
                <property name="text">
                 <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap>exe/icons/1x/peple.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>false</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -903,92 +892,6 @@ QPushButton:pressed {
            </widget>
           </item>
           <item>
-           <widget class="QFrame" name="frame_android">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>55</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>160</width>
-              <height>55</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_18">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QPushButton" name="bn_android">
-               <property name="minimumSize">
-                <size>
-                 <width>80</width>
-                 <height>55</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>160</width>
-                 <height>55</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Android</string>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-	border: none;
-	background-color: rgba(0,0,0,0);
-}
-QPushButton:hover {
-	background-color: rgb(91,90,90);
-}
-QPushButton:pressed {	
-	background-color: rgba(0,0,0,0);
-}</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>../Minimalistic-Flat-Modern-GUI-Template-master/icons/1x/androidAsset 49.png</normaloff>../Minimalistic-Flat-Modern-GUI-Template-master/icons/1x/androidAsset 49.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>22</height>
-                </size>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="frame_8">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -1075,7 +978,7 @@ QPushButton:pressed {
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true"/>
+                <string notr="true">background-color: rgb(85, 0, 255);</string>
                </property>
                <property name="currentIndex">
                 <number>5</number>
@@ -1494,8 +1397,11 @@ QScrollBar::sub-page:vertical {
                  </property>
                  <property name="font">
                   <font>
-                   <family>Segoe UI Semilight</family>
-                   <pointsize>24</pointsize>
+                   <family>Times New Roman</family>
+                   <pointsize>26</pointsize>
+                   <weight>9</weight>
+                   <italic>false</italic>
+                   <bold>false</bold>
                   </font>
                  </property>
                  <property name="cursor">
@@ -1505,7 +1411,9 @@ QScrollBar::sub-page:vertical {
                   <string>Schedule</string>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">color:rgb(255,255,255);</string>
+                  <string notr="true">font: 75 26pt &quot;Times New Roman&quot;;
+color:rgb(255,255,255);
+</string>
                  </property>
                  <property name="text">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; color:#ffffff;&quot;&gt;Booking&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1539,7 +1447,7 @@ QScrollBar::sub-page:vertical {
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">background-color: rgb(0, 0, 0);
+                  <string notr="true">background-color: rgb(51, 51, 51);
 border-radius:50px;</string>
                  </property>
                  <widget class="QPushButton" name="pushButton_ConfirmBooking">
@@ -1909,7 +1817,7 @@ color: rgb(255, 255, 255);</string>
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_11">
+                <widget class="QLabel" name="Book_Now">
                  <property name="geometry">
                   <rect>
                    <x>380</x>
@@ -1925,7 +1833,7 @@ color: rgb(255, 255, 255);</string>
                   </font>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">QLabel#label_11{
+                  <string notr="true">QLabel#Book_Now{
 background-color: rgb(0, 0, 0);
 background-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);
@@ -1973,7 +1881,7 @@ color: rgb(255, 255, 255);</string>
                 <zorder>label_22</zorder>
                 <zorder>comboBox_TicketType</zorder>
                 <zorder>label_12</zorder>
-                <zorder>label_11</zorder>
+                <zorder>Book_Now</zorder>
                </widget>
                <widget class="QWidget" name="page_cloud">
                 <property name="styleSheet">
@@ -4357,6 +4265,8 @@ QSlider::sub-page:vertical {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

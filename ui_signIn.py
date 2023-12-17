@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ui_signInqTNngl.ui'
+## Form generated from reading UI file 'ui_signInRZSwaB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.14.1
 ##
@@ -9,13 +9,11 @@
 ################################################################################
 
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-                            QRect, QSize, QUrl, Qt)
+    QRect, QSize, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-                           QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-                           QRadialGradient)
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
 from PySide2.QtWidgets import *
-
-import res_rc
 
 
 class Ui_SignIn(object):
@@ -23,7 +21,7 @@ class Ui_SignIn(object):
         if SignIn.objectName():
             SignIn.setObjectName(u"SignIn")
         SignIn.setEnabled(True)
-        SignIn.resize(704, 800)
+        SignIn.resize(741, 800)
         SignIn.setStyleSheet(u"")
         self.widget = QWidget(SignIn)
         self.widget.setObjectName(u"widget")
@@ -33,12 +31,12 @@ class Ui_SignIn(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(0, 29, 201, 651))
         self.label.setStyleSheet(u"background-color: rgb(0, 0, 0);\n"
-                                 "border-top-left-radius: 50px;")
+"border-top-left-radius: 50px;")
         self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(200, 30, 411, 651))
         self.label_2.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-                                   "border-bottom-right-radius: 50px;")
+"border-bottom-right-radius: 50px;")
         self.label_3 = QLabel(self.widget)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(330, 90, 161, 61))
@@ -60,22 +58,19 @@ class Ui_SignIn(object):
         self.pushButton.setFont(font1)
         self.pushButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.pushButton.setStyleSheet(u"QPushButton#pushButton{\n"
-                                      "	\n"
-                                      "	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, "
-                                      "y2:0.477, stop:0 rgba(11, 131, 120, 219), stop:1 rgba(85, 98, 112, 226));\n"
-                                      "	color:rgba(255, 255, 255, 210);\n"
-                                      "	border-radius:5px;\n"
-                                      "}\n"
-                                      "QPushButton#pushButton:hover{\n"
-                                      "	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, "
-                                      "y2:0.477, stop:0 rgba(150, 123, 111, 219),"
-                                      "stop:1 rgba(85, 81, 84, 226));\n"
-                                      "}\n"
-                                      "QPushButton#pushButton:pressed{\n"
-                                      "	padding-left: 5px;\n"
-                                      "	padding-top: 5px;\n"
-                                      "	background-color:rgba(150,123,111,255);\n"
-                                      "}")
+"	\n"
+"	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(11, 131, 120, 219), stop:1 rgba(85, 98, 112, 226));\n"
+"	color:rgba(255, 255, 255, 210);\n"
+"	border-radius:5px;\n"
+"}\n"
+"QPushButton#pushButton:hover{\n"
+"	background-color: qlineargradient(spread:pad, x1:0, y1:0.505682, x2:1, y2:0.477, stop:0 rgba(150, 123, 111, 219), stop:1 rgba(85, 81, 84, 226));\n"
+"}\n"
+"QPushButton#pushButton:pressed{\n"
+"	padding-left: 5px;\n"
+"	padding-top: 5px;\n"
+"	background-color:rgba(150,123,111,255);\n"
+"}")
         self.label_8 = QLabel(self.widget)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(10, 120, 181, 141))
@@ -102,7 +97,7 @@ class Ui_SignIn(object):
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(240, 420, 31, 41))
         self.frame.setStyleSheet(u"image: url(:/images/google-icon.png);\n"
-                                 "border-radius:10px")
+"border-radius:10px")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.Google_btn_2 = QPushButton(self.widget)
@@ -115,12 +110,12 @@ class Ui_SignIn(object):
         self.Google_btn_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.Google_btn_2.setLayoutDirection(Qt.RightToLeft)
         self.Google_btn_2.setStyleSheet(u"QPushButton#Google_btn_2{\n"
-                                        "	border: 2px solid rgb(0, 0, 0);\n"
-                                        "	border-radius:10px;\n"
-                                        "}\n"
-                                        "QPushButton#Google_btn_2:hover {\n"
-                                        "	background-color: rgb(208, 208, 208);\n"
-                                        "}")
+"	border: 2px solid rgb(0, 0, 0);\n"
+"	border-radius:10px;\n"
+"}\n"
+"QPushButton#Google_btn_2:hover {\n"
+"	background-color: rgb(208, 208, 208);\n"
+"}")
         self.lineEdit_9 = QLineEdit(self.widget)
         self.lineEdit_9.setObjectName(u"lineEdit_9")
         self.lineEdit_9.setGeometry(QRect(220, 250, 351, 41))
@@ -129,20 +124,20 @@ class Ui_SignIn(object):
         font5.setPointSize(10)
         self.lineEdit_9.setFont(font5)
         self.lineEdit_9.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);\n"
-                                      "border:none;\n"
-                                      "border-bottom:2px solid rgba(46, 82, 101, 200);\n"
-                                      "color:rgba(0, 0, 0, 240);\n"
-                                      "padding-bottom:7px;")
+"border:none;\n"
+"border-bottom:2px solid rgba(46, 82, 101, 200);\n"
+"color:rgba(0, 0, 0, 240);\n"
+"padding-bottom:7px;")
         self.lineEdit_9.setEchoMode(QLineEdit.Password)
         self.lineEdit_7 = QLineEdit(self.widget)
         self.lineEdit_7.setObjectName(u"lineEdit_7")
         self.lineEdit_7.setGeometry(QRect(220, 180, 351, 41))
         self.lineEdit_7.setFont(font5)
         self.lineEdit_7.setStyleSheet(u"background-color:rgba(0, 0, 0, 0);\n"
-                                      "border:none;\n"
-                                      "border-bottom:2px solid rgba(46, 82, 101, 200);\n"
-                                      "color:rgba(0, 0, 0, 240);\n"
-                                      "padding-bottom:7px;")
+"border:none;\n"
+"border-bottom:2px solid rgba(46, 82, 101, 200);\n"
+"color:rgba(0, 0, 0, 240);\n"
+"padding-bottom:7px;")
         self.frame_2 = QFrame(self.widget)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setGeometry(QRect(0, 250, 201, 231))
@@ -165,7 +160,6 @@ class Ui_SignIn(object):
         self.retranslateUi(SignIn)
 
         QMetaObject.connectSlotsByName(SignIn)
-
     # setupUi
 
     def retranslateUi(self, SignIn):
@@ -174,12 +168,11 @@ class Ui_SignIn(object):
         self.label_2.setText("")
         self.label_3.setText(QCoreApplication.translate("SignIn", u"Sign In", None))
         self.pushButton.setText(QCoreApplication.translate("SignIn", u"Sign In", None))
-        self.label_8.setText(QCoreApplication.translate("SignIn",
-                                                        u"<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; font-style:italic;\">Anonymous</span></p><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; font-style:italic;\">Analytics</span></p></body></html>",
-                                                        None))
+        self.label_8.setText(QCoreApplication.translate("SignIn", u"<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-style:italic;\">Railway</span></p><p align=\"center\"><span style=\" font-size:18pt; font-style:italic;\">Analysis</span></p></body></html>", None))
         self.label_4.setText(QCoreApplication.translate("SignIn", u"Do not have an account?", None))
         self.CreateAcc.setText(QCoreApplication.translate("SignIn", u"Register Now", None))
         self.Google_btn_2.setText(QCoreApplication.translate("SignIn", u"Sign In with Google", None))
         self.lineEdit_9.setPlaceholderText(QCoreApplication.translate("SignIn", u"Password", None))
         self.lineEdit_7.setPlaceholderText(QCoreApplication.translate("SignIn", u"Username/Email", None))
     # retranslateUi
+

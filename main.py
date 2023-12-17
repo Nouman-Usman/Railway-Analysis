@@ -49,7 +49,7 @@ class SignInApp(QStackedWidget):
             passport_size_pixmap = original_pixmap.scaled(71, 61)
             self.ui_signup.profilePic.setPixmap(passport_size_pixmap)
             self.ui_signup.profilePic.setAutoFillBackground(True)
-            destination_file_name = 'profile.png'
+            destination_file_name = 'Images/profile.png'
             destination_path = os.path.join(os.getcwd(), destination_file_name)
             shutil.copy(fname, destination_path)
             print("File copied successfully.")
@@ -76,19 +76,15 @@ class SignInApp(QStackedWidget):
             print(f"Error: {err}")
 
     def googleSignIN(self):
-        print('google')
         threading.Thread(target=signInWithGoogle.main).start()
-        if signInWithGoogle.MyRequestHandler:
-            print("User Signed In Successfully")
+        if signInWithGoogle.MyRequestHandler.close_window_flag:
+            print("Signed Up Successfully")
+            self.open_main_menu("Nouman")
 
     def check(self, username, password):
         try:
             self.connectDB()
-
-            # Assuming you have a cursor object
             cursor = self.db.cursor()
-
-            # SQL statement to check if the user exists
             check_user_query = """
                             SELECT * FROM signup
                             WHERE (username = %s )
@@ -97,16 +93,15 @@ class SignInApp(QStackedWidget):
             cursor.execute(check_user_query, user_data)
             result = cursor.fetchone()
             if result:
-                # Check if the password entered by the user matches the hashed password stored in the database
                 if bcrypt.checkpw(password.encode('utf-8'), result[2].encode('utf-8')):
                     print(f"User {username} signed in successfully!")
+                    self.open_main_menu(username)
                 else:
                     print("Invalid username or password")
             else:
                 print("Record Invalid")
 
         except mysql.connector.Error as err:
-            # Handle errors appropriately in your application
             print(f"Error: {err}")
 
     def signup(self, username, email, password):
@@ -128,7 +123,7 @@ class SignInApp(QStackedWidget):
 
                 print(f"User {username} signed up successfully!")
                 # self.close()
-                self.open_main_menu()
+                self.open_main_menu(username)
             else:
                 self.ui_signup.lineEdit_8.setText('')
                 self.ui_signup.lineEdit_8.setFocus()
@@ -149,9 +144,10 @@ class SignInApp(QStackedWidget):
     def show_signin_form(self, event):
         self.setCurrentIndex(0)
 
-    def open_main_menu(self):
+    def open_main_menu(self, name):
+        self.close()
         print('Main Menu')
-        mainMenu1.build(SignInApp)
+        mainMenu1.build(SignInApp, name)
 
 
 if __name__ == "__main__":

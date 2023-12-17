@@ -1,3 +1,5 @@
+from MainMenu.graph import graph
+
 source = 'Rawalpindi'
 target = 'Karachi'
 shortest_path = graph.dijkstra(source, target)
