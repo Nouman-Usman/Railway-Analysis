@@ -80,9 +80,10 @@ class SignInApp(QStackedWidget):
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
         signInWithGoogle.MyRequestHandler.authentication_event.wait(timeout=12)
-        if  signInWithGoogle.MyRequestHandler.close_window_flag:
+        if signInWithGoogle.MyRequestHandler.close_window_flag:
             print("Signed Up Successfully")
-            self.open_main_menu("Nouman")
+            print(signInWithGoogle.MyRequestHandler.name)
+            self.open_main_menu(signInWithGoogle.MyRequestHandler.name)
         else:
             print("Authentication failed or timed out")
 

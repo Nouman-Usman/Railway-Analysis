@@ -11,13 +11,14 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 class MyRequestHandler(BaseHTTPRequestHandler):
     close_window_flag = True
     authentication_event = threading.Event()
+    name = 'Nouman Mughal'
 
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
         authorization_code = unquote(query_components.get('code', [''])[0])
         if authorization_code:
             self.close_window_flag = True
-            ans = exchange_code_for_tokens(authorization_code)
+            ans, self.name = exchange_code_for_tokens(authorization_code)
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
@@ -95,7 +96,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.wfile.close()
             if ans:
                 self.close_window_flag = True
-                print('Nouman')
+
+                print(self.name)
                 self.authentication_event.set()
                 self.server.shutdown()
                 sys.exit()
@@ -111,12 +113,9 @@ def start_local_server():
     server_address = ('', 8080)
     httpd = HTTPServer(server_address, MyRequestHandler)
     if httpd:
-        print('Starting local server on port 8080...')
         httpd.serve_forever()
     else:
-        print('server closed')
         httpd.server_close()
-
 
 def exchange_code_for_tokens(authorization_code):
     client_secret_file = 'client_secret_1001459857047-h269q1pgg1k51dhchebpu1vcr1qtc09o.apps.googleusercontent.com.json'
@@ -134,17 +133,11 @@ def exchange_code_for_tokens(authorization_code):
         flow.fetch_token(code=authorization_code)
         session = flow.authorized_session()
         file = session.get('https://www.googleapis.com/userinfo/v2/me').json()
-        # name = file.get('name')
-        print(session.get('https://www.googleapis.com/userinfo/v2/me').json())
-        print('Successful User Authentication ')
-        return True
+        name = file.get('name')
+        return True, name
     except Exception as e:
         print(f"An error occurred during token exchange: {str(e)}")
-        return False
-
-
-def isSignIN():
-    pass
+        return False, None
 
 
 def signInWithGoogle():
@@ -157,6 +150,7 @@ def signInWithGoogle():
 
 
 def main():
+    MyRequestHandler.authentication_event.clear()
     server_thread = threading.Thread(target=start_local_server)
     server_thread.start()
     time.sleep(2)
