@@ -1,10 +1,8 @@
+import csv
 import os
 import shutil
 import sys
 import threading
-import time
-
-import mysql.connector
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import *
 from MainMenu import mainMenu1
@@ -56,26 +54,17 @@ class SignInApp(QStackedWidget):
             shutil.copy(fname, destination_path)
             print("File copied successfully.")
 
-    def connectDB(self):
-        host = "127.0.0.1"
-        user = "root"
-        password = "1242"
-        database = "student"
-
+    def connect_csv(self):
+        csv_file = 'MainMenu/Database/users.csv'
+        # Create the CSV file if it doesn't exist
         try:
-            self.db = mysql.connector.connect(host=host, user=user, password=password, database=database)
-            if self.db.is_connected():
-                cursor = self.db.cursor()
-                # Execute SQL statements to create tables
-                cursor.execute("""
-                            CREATE TABLE IF NOT EXISTS signup (
-                                username VARCHAR(50) NOT NULL UNIQUE,
-                                email VARCHAR(100) NOT NULL UNIQUE,
-                                password VARCHAR(255) NOT NULL
-                            )
-                        """)
-        except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            with open(csv_file, 'r') as _:
+                pass
+        except FileNotFoundError:
+            with open(csv_file, 'w', newline='') as csvfile:
+                fieldnames = ['username', 'email', 'password']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
 
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
@@ -89,60 +78,52 @@ class SignInApp(QStackedWidget):
 
     def check(self, username, password):
         try:
-            self.connectDB()
-            cursor = self.db.cursor()
-            check_user_query = """
-                            SELECT * FROM signup
-                            WHERE (username = %s )
-                        """
-            user_data = (username,)
-            cursor.execute(check_user_query, user_data)
-            result = cursor.fetchone()
-            if result:
-                if bcrypt.checkpw(password.encode('utf-8'), result[2].encode('utf-8')):
+            self.connect_csv()
+            with open('MainMenu/Database/users.csv', 'r') as csvfile:
+                reader = csv.DictReader(csvfile)
+                user_row = next((row for row in reader if row['username'] == username), None)
+
+            if user_row:
+                stored_password = user_row['password']
+                if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
                     print(f"User {username} signed in successfully!")
                     self.open_main_menu(username)
                 else:
-                    print("Invalid username or password")
+                    raise ValueError("Invalid username or password")
             else:
-                print("Record Invalid")
+                raise ValueError("Record Invalid")
 
-        except mysql.connector.Error as err:
-            print(f"Error: {err}")
+        except Exception as e:
+            print(f"Error: {e}")
+            raise
 
     def signup(self, username, email, password):
         try:
-            # if username.text() = '' or
-            self.connectDB()
-            if email.__contains__('@'):
-                print('Email is verified')
-                cursor = self.db.cursor()
-                hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-                # SQL statement to insert a new user
-                insert_user_query = """
-                    INSERT INTO signup (username, password, email)
-                    VALUES (%s, %s, %s)
-                """
-                user_data = (username, hashed_password, email)
-                cursor.execute(insert_user_query, user_data)
-                self.db.commit()
+            self.connect_csv()
+            with open('MainMenu/Database/users.csv', 'r') as csvfile:
+                reader = csv.DictReader(csvfile)
+                if any(row['username'] == username or row['email'] == email for row in reader):
+                    raise ValueError("Username or email already exists.")
 
-                print(f"User {username} signed up successfully!")
-                # self.close()
-                self.open_main_menu(username)
-            else:
-                self.ui_signup.lineEdit_8.setText('')
-                self.ui_signup.lineEdit_8.setFocus()
-                self.ui_signup.lineEdit_8.setStyleSheet(
-                    'background-color: rgba(0, 0, 0, 0); '
-                    'border: none; '
-                    'border-bottom: 2px solid rgba(46, 82, 101, 200); '
-                    'color: rgb(255, 0, 0);'
-                    'padding-bottom: 7px;'
-                )
-                self.ui_signup.lineEdit_8.setPlaceholderText('Enter Correct Email')
-        except mysql.connector.Error as err:
-            print(f"Error: {err}")
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode()
+            new_user = {'username': username, 'email': email, 'password': hashed_password}
+
+            with open('MainMenu/Database/users.csv', 'a', newline='') as csvfile:
+                fieldnames = ['username', 'email', 'password']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+                # Write header only if the file is empty
+                if not csvfile.tell():
+                    writer.writeheader()
+
+                writer.writerow(new_user)
+
+            print(f"User {username} signed up successfully!")
+            self.open_main_menu(username)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            raise
 
     def show_signup_form(self, event):
         self.setCurrentIndex(1)
