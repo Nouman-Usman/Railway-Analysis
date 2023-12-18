@@ -134,7 +134,7 @@ class SignInApp(QStackedWidget):
     def open_main_menu(self, name):
         self.close()
         print('Main Menu')
-        mainMenu1.build(SignInApp, name)
+        mainMenu1.build(name)
 
 
 if __name__ == "__main__":
