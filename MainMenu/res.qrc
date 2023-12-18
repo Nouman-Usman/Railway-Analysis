@@ -1,0 +1,50 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>images/about pageAsset 96.png</file>
+    <file>images/about_full screen.PNG</file>
+    <file>images/about_home.PNG</file>
+    <file>images/android.png</file>
+    <file>images/android_game.PNG</file>
+    <file>images/android1.PNG</file>
+    <file>images/bug_fullscreen.PNG</file>
+    <file>images/bug1.PNG</file>
+    <file>images/buttons.png</file>
+    <file>images/cloud1.PNG</file>
+    <file>images/color scheme.png</file>
+    <file>images/dialogerro.png</file>
+    <file>images/font schem.png</file>
+    <file>images/home_full screen.PNG</file>
+    <file>images/home1.PNG</file>
+    <file>images/homeDetailed.png</file>
+    <file>images/homepage.png</file>
+    <file>images/layout_infoAsset 100.png</file>
+    <file>images/layoutAsset 97.png</file>
+    <file>images/widget 2.png</file>
+    <file>images/widget3.png</file>
+  </qresource>
+  <qresource prefix="Icons">
+    <file>icons/1x/androidAsset 49.png</file>
+    <file>icons/1x/arrow.png</file>
+    <file>icons/1x/bookAsset 57.png</file>
+    <file>icons/1x/bugAsset 47.png</file>
+    <file>icons/1x/bulletAsset 54.png</file>
+    <file>icons/1x/cleanAsset 59.png</file>
+    <file>icons/1x/closeAsset 43.png</file>
+    <file>icons/1x/cloudAsset 48.png</file>
+    <file>icons/1x/dragAsset 52.png</file>
+    <file>icons/1x/errorAsset 55.png</file>
+    <file>icons/1x/gameAsset 61.png</file>
+    <file>icons/1x/hideAsset 53.png</file>
+    <file>icons/1x/homeAsset 46.png</file>
+    <file>icons/1x/logo.png</file>
+    <file>icons/1x/max.png</file>
+    <file>icons/1x/peopleAsset 62.png</file>
+    <file>icons/1x/peple.png</file>
+    <file>icons/1x/restore.png</file>
+    <file>icons/1x/settAsset 50.png</file>
+    <file>icons/1x/smile2Asset 1.png</file>
+    <file>icons/1x/smileAsset 1.png</file>
+    <file>icons/1x/windAsset 51.png</file>
+    <file>icons/1x/worldAsset 60.png</file>
+  </qresource>
+</RCC>
