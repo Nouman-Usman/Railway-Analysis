@@ -9,9 +9,10 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 
 
 class MyRequestHandler(BaseHTTPRequestHandler):
-    close_window_flag = True
+    close_window_flag = False
     authentication_event = threading.Event()
-    name = 'Nouman Mughal'
+    name = 'None'
+    response_sent = False
 
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
@@ -94,10 +95,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 """
             self.wfile.write(response_content.encode())
             self.wfile.close()
-            if ans:
+            self.response_sent = True
+            if self.response_sent and ans:
+                breakpoint()
                 self.close_window_flag = True
-
-                print(self.name)
                 self.authentication_event.set()
                 self.server.shutdown()
                 sys.exit()

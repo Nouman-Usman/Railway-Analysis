@@ -22,9 +22,7 @@ class SignInApp(QStackedWidget):
         self.widget_signin = QWidget()
         self.widget_signup = QWidget()
         self.ui_signin.setupUi(self.widget_signin)
-        # Set up the sign-up form
         self.ui_signup.setupUi(self.widget_signup)
-        # Add forms to the stacked widget
         self.addWidget(self.widget_signin)
         self.addWidget(self.widget_signup)
 
@@ -68,13 +66,14 @@ class SignInApp(QStackedWidget):
 
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
-        signInWithGoogle.MyRequestHandler.authentication_event.wait(timeout=12)
+        signInWithGoogle.MyRequestHandler.authentication_event.wait()
+        print(signInWithGoogle.MyRequestHandler.close_window_flag)
         if signInWithGoogle.MyRequestHandler.close_window_flag:
             print("Signed Up Successfully")
             print(signInWithGoogle.MyRequestHandler.name)
             self.open_main_menu(signInWithGoogle.MyRequestHandler.name)
         else:
-            print("Authentication failed or timed out")
+            mainMenu1.MainWindow.show_error_popup(self, 'Error ', 'Authentication Failed')
 
     def check(self, username, password):
         try:
@@ -132,7 +131,7 @@ class SignInApp(QStackedWidget):
         self.setCurrentIndex(0)
 
     def open_main_menu(self, name):
-        self.close()
+        self.hide()
         print('Main Menu')
         mainMenu1.build(name)
 
