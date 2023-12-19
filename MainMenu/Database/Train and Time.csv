@@ -1,8 +1,8 @@
-Train Name,Timing,Available Seats,From-To
-Rawalpindi Express,7:45 AM,102,Lahore to Rawalpindi
-Jaffar Express,8:30 AM,80,Karachi to Lahore
-Allama Iqbal Express,11:00 AM,130,Multan to Quetta
-Awam Express,1:15 PM,80,Lahore to Multan
-Badar Express,3:00 PM,65,Peshawar to Rawalpindi
-Baluchistan Express,5:00 PM,143,Quetta to Lahore
-Bahauddin Zakaria Express,4:55 PM,91,Peshawar to Multan
+Train Name,Timing,From,To
+Rawalpindi Express,7:45 AM,Lahore,Rawalpindi
+Jaffar Express,8:30 AM,Karachi,Lahore
+Allama Iqbal Express,11:00 AM,Multan,Quetta
+Awam Express,1:15 PM,Lahore,Multan
+Badar Express,3:00 PM,Peshawar,Rawalpindi
+Baluchistan Express,5:00 PM,Quetta,Lahore
+Bahauddin Zakaria Express,4:55 PM,Peshawar,Multan

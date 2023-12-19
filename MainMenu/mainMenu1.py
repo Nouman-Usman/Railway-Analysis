@@ -1,16 +1,20 @@
 from PyQt5.uic.properties import QtGui
+from PySide2 import QtGui
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
+from PySide2.QtGui import QPixmap, QColor, QBrush
+from PyQt5.QtGui import QColor
+from datetime import datetime
+from dateutil import parser
+
 from MainMenu import ui_dialog, ui_error
 from MainMenu.graph import Graph
 from MainMenu.ui_function import UIFunction
 from MainMenu.ui_main import Ui_MainWindow
 from MainMenu.linkedlist import LinkedList
-from MainMenu.Algorithm import merge_sort, quick_sort
+from MainMenu.Algorithm import merge_sort, quick_sort, bubble_sort
 import pandas as pd
-
-
 
 class MainWindow(QMainWindow):
     def __init__(self, name=None, *args, **kwargs):
@@ -18,6 +22,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.original_data = None
         applicationName = "Railway Analysis"
         self.setGeometry(100, 100, 1000, 600)
         self.setWindowTitle(applicationName)
@@ -72,7 +77,16 @@ class MainWindow(QMainWindow):
 
     def confirm_booking(self):
         if not self.ui.radioButton_5.isChecked():
-            self.show_error_popup("Error", "Please agree all the terms and conditions to proceed")
+            self.show_error_popup("Error", "Please agree to all the terms and conditions to proceed")
+            return
+
+        # Check if start_Location and end_Location are valid
+        start_location = self.ui.start_Location.currentText()
+        end_location = self.ui.end_Location.currentText()
+
+        if not self.is_valid_route(start_location, end_location):
+            self.show_error_popup("Error", "Invalid route. Please select valid start and end locations.")
+            self.reset_booking_page()
             return
 
         self.update_label_amount()
@@ -80,6 +94,18 @@ class MainWindow(QMainWindow):
             self.show_info_popup("Congratulations", "Booking confirmed successfully! Enjoy your journey!")
             self.reset_booking_page()
             self.ui.stackedWidget.setCurrentIndex(self.ui.stackedWidget.indexOf(self.ui.page_home))
+
+    def is_valid_route(self, start_location, end_location):
+        # Load data from "Train and Timing.csv"
+        schedule_data = pd.read_csv("MainMenu/Database/Train and Time.csv")
+
+        # Check if the start_location is in the "From" column
+        valid_start_location = start_location in schedule_data['From'].values
+
+        # Check if the end_location is in the "To" column
+        valid_end_location = end_location in schedule_data['To'].values
+
+        return valid_start_location and valid_end_location
 
     def all_constraints_met(self):
         if self.ui.start_Location.currentText() != self.ui.end_Location.currentText():
@@ -118,11 +144,15 @@ class MainWindow(QMainWindow):
         for row in data:
             self.schedule_linked_list.append_list(row)
 
+        # Store the original unsorted data
+        self.original_data = data.copy()
+
         # Display the data in the table
         self.display_linked_list_in_table()
         self.ui.table_schedule.setColumnCount(4)
-        self.ui.table_schedule.setHorizontalHeaderLabels(["Train Name", "Departure Time", "Seats", "From-To"])
+        self.ui.table_schedule.setHorizontalHeaderLabels(["Train Name", "Departure Time", "From", "To"])
         self.display_linked_list_in_table()
+
 
     def display_linked_list_in_table(self):
         # Clear existing table content
@@ -133,8 +163,6 @@ class MainWindow(QMainWindow):
 
         # Iterate through the linked list and add data to the table
         while current_node:
-            print(current_node.data)  # Add this line for debugging
-
             self.ui.table_schedule.insertRow(row_position)
             for col_position, data in enumerate(current_node.data):
                 item = QTableWidgetItem(str(data))
@@ -146,13 +174,16 @@ class MainWindow(QMainWindow):
         self.clear_table_highlights()
         if text == "":
             return
+
         current_node = self.schedule_linked_list.head
         row_position = 0
         while current_node:
             for col_position, data in enumerate(current_node.data):
                 item_text = str(data)
                 item = self.ui.table_schedule.item(row_position, col_position)
+
                 if text.lower() in item_text.lower():
+                    # Highlight the cell
                     item.setBackground(QtGui.QColor(255, 255, 0))
             current_node = current_node.next
             row_position += 1
@@ -206,7 +237,7 @@ class MainWindow(QMainWindow):
         self.diag.exec_()
 
     def errorexec(self, heading, icon, btnOk):
-        ui_error.errorUi.errorConstrict(self.error, heading, icon, btnOk)
+        ui_error.ui_error.errorUi.errorConstrict(self.error, heading, icon, btnOk)
         self.error.exec_()
 
     def sort_table(self):
@@ -215,9 +246,24 @@ class MainWindow(QMainWindow):
         if sort_option == "Name":
             # Sort by Name using Merge Sort
             self.sort_table_by_name()
-        elif sort_option in ["Time", "Seats"]:
-            # Sort by Time or Seats using Quick Sort
-            self.sort_table_by_quick_sort()
+        elif sort_option == "Time":
+            # Sort by Time using custom sort_table_by_time method
+            self.sort_table_by_time()
+
+        # Update the linked list or data structure after sorting
+        self.update_linked_list_after_sorting()
+        # Clear search highlights and apply search on the updated data
+        self.clear_table_highlights()
+        self.search_and_highlight(self.ui.label_search.text())
+
+    def update_linked_list_after_sorting(self):
+        # Assuming 'data' is a list of lists representing your table data
+        data = self.get_table_data()
+        self.schedule_linked_list = LinkedList()
+
+        # Add each row of data as a list to the linked list
+        for row in data:
+            self.schedule_linked_list.append_list(row)
 
     def sort_table_by_name(self):
         # Assuming 'data' is a list of lists representing your table data
@@ -226,17 +272,11 @@ class MainWindow(QMainWindow):
         # Assuming 'table_schedule' is your QTableWidget
         self.sort_table_column(col_index, data, merge_sort)
 
-    def sort_table_by_quick_sort(self):
-        # Assuming 'data' is a list of lists representing your table data
-        data = self.get_table_data()
-        col_index = 1  # Assuming you want to sort by the second column
-        # Assuming 'table_schedule' is your QTableWidget
-        self.sort_table_column(col_index, data, quick_sort)
 
-    def sort_table_column(self, column, data, sort_algorithm):
+    def sort_table_column(self, column, data, sort_algorithm, key=None):
         col_index = self.ui.table_schedule.horizontalHeader().visualIndex(column)
         column_data = [row[col_index] for row in data]
-        sorted_column_data = sort_algorithm(data, col_index)
+        sorted_column_data = sort_algorithm(data, col_index, key=key)
 
         # Assuming 'table_schedule' is your QTableWidget
         self.display_sorted_column(col_index, sorted_column_data)
@@ -247,6 +287,18 @@ class MainWindow(QMainWindow):
             for col, value in enumerate(row_data):
                 item = QTableWidgetItem(str(value))
                 self.ui.table_schedule.setItem(row, col, item)
+
+    def convert_time_to_sortable_format(self, time_str):
+        # Example: Convert "11:00 AM" to (11, 0, "AM")
+        dt = parser.parse(time_str)
+        return dt.hour, dt.minute, dt.strftime("%p")
+    
+    def sort_table_by_time(self):
+        # Assuming 'data' is a list of lists representing your table data
+        data = self.get_table_data()
+        col_index = 1  # Assuming you want to sort by the second column (Departure Time)
+        # Assuming 'table_schedule' is your QTableWidget
+        self.sort_table_column(col_index, data, merge_sort, key=self.convert_time_to_sortable_format)
 
     def get_table_data(self):
         # Assuming 'table_schedule' is your QTableWidget
