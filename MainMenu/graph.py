@@ -1,6 +1,5 @@
-
-
 import heapq
+
 
 class Graph:
     def __init__(self):
@@ -35,6 +34,7 @@ class Graph:
                             heapq.heappush(queue, (new_cost, neighbour))
 
         return path[end] if end in path else "No Path"
+
 
 # Example usage
 graph = Graph()

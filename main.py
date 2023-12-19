@@ -75,7 +75,6 @@ class SignInApp(QStackedWidget):
             print("Doing other work...")
             download_thread.join()
             self.open_main_menu(signInWithGoogle.MyRequestHandler.name)
-            # print(signInWithGoogle.MyRequestHandler.profile_url)
         else:
             mainMenu1.MainWindow.show_error_popup(self, 'Error ', 'Authentication Failed')
 
