@@ -13,13 +13,14 @@ class MyRequestHandler(BaseHTTPRequestHandler):
     authentication_event = threading.Event()
     name = 'None'
     response_sent = False
-
+    profile_url = None
     def do_GET(self):
         query_components = parse_qs(urlparse(self.path).query)
         authorization_code = unquote(query_components.get('code', [''])[0])
         if authorization_code:
             self.close_window_flag = True
-            ans, self.name = exchange_code_for_tokens(authorization_code)
+            ans, MyRequestHandler.name, MyRequestHandler.profile_url = exchange_code_for_tokens(authorization_code)
+            print(self.name)
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
@@ -97,8 +98,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.wfile.close()
             self.response_sent = True
             if self.response_sent and ans:
-                breakpoint()
-                self.close_window_flag = True
+                MyRequestHandler.close_window_flag = True
                 self.authentication_event.set()
                 self.server.shutdown()
                 sys.exit()
@@ -108,6 +108,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'Error: Authorization code not found.')
         return False
+
+
 
 
 def start_local_server():
@@ -136,7 +138,8 @@ def exchange_code_for_tokens(authorization_code):
         session = flow.authorized_session()
         file = session.get('https://www.googleapis.com/userinfo/v2/me').json()
         name = file.get('name')
-        return True, name
+        pic = file.get('picture')
+        return True, name, pic
     except Exception as e:
         print(f"An error occurred during token exchange: {str(e)}")
         return False, None
@@ -149,7 +152,6 @@ def signInWithGoogle():
         "&redirect_uri=http://localhost:8080&scope=https://www.googleapis.com/auth/userinfo.profile&response_type=code"
     )
     threading.Thread(target=webbrowser.open, args=(google_signin_url,)).start()
-
 
 def main():
     MyRequestHandler.authentication_event.clear()

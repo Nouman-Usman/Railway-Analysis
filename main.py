@@ -9,6 +9,7 @@ from MainMenu import mainMenu1
 import signInWithGoogle
 from ui_signIn import Ui_SignIn
 from ui_signUp import Ui_SignUp
+import requests
 import bcrypt
 
 
@@ -67,13 +68,25 @@ class SignInApp(QStackedWidget):
     def googleSignIN(self):
         threading.Thread(target=signInWithGoogle.main).start()
         signInWithGoogle.MyRequestHandler.authentication_event.wait()
-        print(signInWithGoogle.MyRequestHandler.close_window_flag)
         if signInWithGoogle.MyRequestHandler.close_window_flag:
-            print("Signed Up Successfully")
-            print(signInWithGoogle.MyRequestHandler.name)
+            url = signInWithGoogle.MyRequestHandler.profile_url
+            download_thread = threading.Thread(target=self.download_image, args=(url,))
+            download_thread.start()
+            print("Doing other work...")
+            download_thread.join()
             self.open_main_menu(signInWithGoogle.MyRequestHandler.name)
+            # print(signInWithGoogle.MyRequestHandler.profile_url)
         else:
             mainMenu1.MainWindow.show_error_popup(self, 'Error ', 'Authentication Failed')
+
+    def download_image(self, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open("Images/profile.png", "wb") as file:
+                file.write(response.content)
+            print("Image downloaded successfully.")
+        else:
+            print(f"Failed to download image. Status code: {response.status_code}")
 
     def check(self, username, password):
         try:
