@@ -30,7 +30,8 @@ class errorUi(QDialog):
         self.e.bn_ok.setText(btnOk)
         pixmap2 = QtGui.QPixmap(icon)
         self.e.lab_icon.setPixmap(pixmap2)
-        
+
+
 class Ui_Error(object):
     def setupUi(self, Error):
         if not Error.objectName():
@@ -80,7 +81,6 @@ class Ui_Error(object):
 
         self.horizontalLayout_2.addWidget(self.lab_heading)
 
-
         self.verticalLayout.addWidget(self.frame_top)
 
         self.frame_bottom = QFrame(self.frame)
@@ -96,33 +96,31 @@ class Ui_Error(object):
         self.bn_ok.setMinimumSize(QSize(69, 25))
         self.bn_ok.setMaximumSize(QSize(69, 25))
         self.bn_ok.setStyleSheet(u"QPushButton {\n"
-"	border: 2px solid rgb(51,51,51);\n"
-"	border-radius: 5px;	\n"
-"	color:rgb(255,255,255);\n"
-"	background-color: rgb(51,51,51);\n"
-"}\n"
-"QPushButton:hover {\n"
-"	border: 2px solid rgb(0,143,150);\n"
-"	background-color: rgb(0,143,150);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	border: 2px solid rgb(0,143,150);\n"
-"	background-color: rgb(51,51,51);\n"
-"}\n"
-"")
+                                 "	border: 2px solid rgb(51,51,51);\n"
+                                 "	border-radius: 5px;	\n"
+                                 "	color:rgb(255,255,255);\n"
+                                 "	background-color: rgb(51,51,51);\n"
+                                 "}\n"
+                                 "QPushButton:hover {\n"
+                                 "	border: 2px solid rgb(0,143,150);\n"
+                                 "	background-color: rgb(0,143,150);\n"
+                                 "}\n"
+                                 "QPushButton:pressed {	\n"
+                                 "	border: 2px solid rgb(0,143,150);\n"
+                                 "	background-color: rgb(51,51,51);\n"
+                                 "}\n"
+                                 "")
 
         self.gridLayout.addWidget(self.bn_ok, 0, 0, 1, 1)
 
-
         self.verticalLayout.addWidget(self.frame_bottom)
 
-
         self.horizontalLayout.addWidget(self.frame)
-
 
         self.retranslateUi(Error)
 
         QMetaObject.connectSlotsByName(Error)
+
     # setupUi
 
     def retranslateUi(self, Error):
@@ -131,4 +129,3 @@ class Ui_Error(object):
         self.lab_heading.setText("")
         self.bn_ok.setText("")
     # retranslateUi
-

@@ -132,140 +132,30 @@ class UIFunction:
                 self.ui.lab_tab.setText("About > Booking")
                 self.ui.frame_booking.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
 
-        elif buttonName=='bn_android':
+        elif buttonName=='bn_feedback':
             if self.ui.frame_bottom_west.width()==80  and index!=7:
-                self.ui.stackedWidget.setCurrentWidget(self.ui.page_android)
-                self.ui.lab_tab.setText("Android")
-                self.ui.frame_android.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
-                UIFunction.androidStackPages(self, "page_contact")
+                self.ui.stackedWidget.setCurrentWidget(self.ui.page_feedback)
+                self.ui.lab_tab.setText("Feedback")
+                self.ui.frame_feedback.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
+                UIFunction.androidStackPages(self, "page_feedback")
 
             elif self.ui.frame_bottom_west.width()==160  and index!=3:   # ABOUT PAGE STACKED WIDGET
                 self.ui.stackedWidget.setCurrentWidget(self.ui.page_about_android)
                 self.ui.lab_tab.setText("About > Android")
-                self.ui.frame_android.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
+                self.ui.frame_feedback.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
 
-        elif buttonName=='bn_cloud':
+        elif buttonName=='bn_schedule':
             if self.ui.frame_bottom_west.width()==80 and index!=6:
                 self.ui.stackedWidget.setCurrentWidget(self.ui.page_cloud)
-                self.ui.lab_tab.setText("Cloud")
+                self.ui.lab_tab.setText("Schedule")
                 self.ui.frame_schedule.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
 
             elif self.ui.frame_bottom_west.width()==160 and index!=2:   # ABOUT PAGE STACKED WIDGET
                 self.ui.stackedWidget.setCurrentWidget(self.ui.page_about_cloud)
-                self.ui.lab_tab.setText("About > Cloud")
-                self.ui.frame_cloud.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
+                self.ui.lab_tab.setText("About > Schedule")
+                self.ui.frame_schedule.setStyleSheet("background:rgb(91,90,90)") # SETS THE BACKGROUND OF THE CLICKED BUTTON TO LITER COLOR THAN THE REST
 
     def stackPage(self):
 
         self.ui.lab_home_main_hed.setText("Welcome to Railway Analysis")
         self.ui.lab_home_stat_hed.setText("Time")
-
-       
-
-        #########PAGE ANDROID WIDGET AND ITS STACKANDROID WIDGET PAGES
-        self.ui.bn_android_contact.clicked.connect(lambda: UIFunction.androidStackPages(self, "page_contact"))
-        self.ui.bn_android_game.clicked.connect(lambda: UIFunction.androidStackPages(self, "page_game"))
-        self.ui.bn_android_clean.clicked.connect(lambda: UIFunction.androidStackPages(self, "page_clean"))
-        self.ui.bn_android_world.clicked.connect(lambda: UIFunction.androidStackPages(self, "page_world"))
-        
-        ######ANDROID > PAGE CONTACT >>>>>>>>>>>>>>>>>>>>
-        self.ui.bn_android_contact_delete.clicked.connect(lambda: self.dialogexec("Warning", "The Contact Infromtion will be Deleted, Do you want to continue.", "icons/1x/errorAsset 55.png", "Cancel", "Yes"))
-
-        self.ui.bn_android_contact_edit.clicked.connect(lambda: APFunction.editable(self))
-
-        self.ui.bn_android_contact_save.clicked.connect(lambda: APFunction.saveContact(self))
-
-        #######ANDROID > PAGE GAMEPAD >>>>>>>>>>>>>>>>>>>
-        self.ui.textEdit_gamepad.setVerticalScrollBar(self.ui.vsb_gamepad)   # SETTING THE TEXT FILED AREA A SCROLL BAR
-        self.ui.textEdit_gamepad.setText("Type Here Something, or paste something here")
-
-        ######ANDROID > PAGE CLEAN >>>>>>>>>>>>>>>>>>>>>>
-        #NOTHING HERE
-        self.ui.horizontalSlider_2.valueChanged.connect(lambda: print("Slider: Horizondal: ", self.ui.horizontalSlider_2.value())) #CHECK WEATHER THE SLIDER IS MOVED OR NOT
-        self.ui.checkBox.stateChanged.connect(lambda: self.errorexec("Happy to Know you liked the UI", "icons/1x/smile2Asset 1.png", "Ok")) #WHEN THE CHECK BOX IS CHECKED IT ECECUTES THE ERROR BOX WITH MESSAGE.
-        self.ui.checkBox_2.stateChanged.connect(lambda: self.errorexec("Even More Happy to hear this", "icons/1x/smileAsset 1.png", "Ok"))
-
-        ##########PAGE: ABOUT HOME #############
-        # self.ui.text_about_home.setVerticalScrollBar(self.ui.vsb_about_home)
-        # self.ui.text_about_home.setText(aboutHome)
-    
-    def androidStackPages(self, page):
-        #------> THIS LINE CLEARS THE BG COLOR OF PREVIOUS TABS
-        for each in self.ui.frame_android_menu.findChildren(QFrame):
-            each.setStyleSheet("background:rgb(51,51,51)")
-
-        if page == "page_contact":
-            self.ui.stackedWidget_android.setCurrentWidget(self.ui.page_android_contact)
-            self.ui.lab_tab.setText("Android > Contact")
-            self.ui.frame_android_contact.setStyleSheet("background:rgb(91,90,90)")
-
-        elif page == "page_game":
-            self.ui.stackedWidget_android.setCurrentWidget(self.ui.page_android_game)
-            self.ui.lab_tab.setText("Android > GamePad")
-            self.ui.frame_android_game.setStyleSheet("background:rgb(91,90,90)")
-
-        elif page == "page_clean":
-            self.ui.stackedWidget_android.setCurrentWidget(self.ui.page_android_clean)
-            self.ui.lab_tab.setText("Android > Clean")
-            self.ui.frame_android_clean.setStyleSheet("background:rgb(91,90,90)")
-
-        elif page == "page_world":
-            self.ui.stackedWidget_android.setCurrentWidget(self.ui.page_android_world)
-            self.ui.lab_tab.setText("Android > World")
-            self.ui.frame_android_world.setStyleSheet("background:rgb(91,90,90)")
-
-        
-class APFunction():
-    def addNumbers(self, number, enable):
-        if enable:
-            lastProgress = 0
-            for x in range(0, int(number), 1):
-                progress = int((x/int(number))*100)
-                if progress!=lastProgress:
-                    self.ui.progressBar_bug.setValue(progress)
-                    lastProgress = progress
-            self.ui.progressBar_bug.setValue(100)
-    ###########################
-
-    #---> FUNCTION TO CONNECT THE CLOUD USING ADRESS AND RETURN A ERROR STATEMENT
-    def cloudConnect(self):
-        self.ui.bn_cloud_clear.setEnabled(False)
-        textID = self.ui.line_cloud_id.text()
-        textADRESS = self.ui.line_cloud_adress.text()
-        if textID=='asd' and textADRESS=='1234':
-            self.ui.line_cloud_adress.setText("")
-            self.ui.line_cloud_id.setText("")
-            self.ui.line_cloud_proxy.setText("Connection established")
-        else:
-            self.errorexec("Incorrect Credentials", "icons/1x/errorAsset 55.png", "Retry")
-
-    def cloudClear(self):
-        self.ui.line_cloud_proxy.setText("")
-        self.ui.line_cloud_adress.setText("")
-        self.ui.line_cloud_id.setText("")
-
-    #-----> FUNCTION IN ACCOUNT OF CONTACT PAGE IN ANDROID MENU
-    def editable(self):
-        self.ui.line_android_name.setEnabled(True)
-        self.ui.line_android_adress.setEnabled(True)
-        self.ui.line_android_org.setEnabled(True)
-        self.ui.line_android_email.setEnabled(True)
-        self.ui.line_android_ph.setEnabled(True)
-
-        self.ui.bn_android_contact_save.setEnabled(True)
-        self.ui.bn_android_contact_edit.setEnabled(False)
-        self.ui.bn_android_contact_share.setEnabled(False)
-        self.ui.bn_android_contact_delete.setEnabled(False)
-
-#-----> FUNCTION TO SAVE THE MODOFOED TEXT FIELD
-    def saveContact(self):
-        self.ui.line_android_name.setEnabled(False)
-        self.ui.line_android_adress.setEnabled(False)
-        self.ui.line_android_org.setEnabled(False)
-        self.ui.line_android_email.setEnabled(False)
-        self.ui.line_android_ph.setEnabled(False)
-
-        self.ui.bn_android_contact_save.setEnabled(False)
-        self.ui.bn_android_contact_edit.setEnabled(True)
-        self.ui.bn_android_contact_share.setEnabled(True)
-        self.ui.bn_android_contact_delete.setEnabled(True)

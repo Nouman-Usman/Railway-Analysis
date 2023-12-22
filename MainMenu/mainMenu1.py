@@ -5,16 +5,21 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem
 from PySide2.QtGui import QPixmap, QColor, QBrush
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QDialog
+from PyQt5.uic import loadUi
 from datetime import datetime
 from dateutil import parser
-
+import networkx as nx
+import matplotlib.pyplot as plt
+from DSA.graph import Graph
 from MainMenu import ui_dialog, ui_error
-from MainMenu.graph import Graph
 from MainMenu.ui_function import UIFunction
 from MainMenu.ui_main import Ui_MainWindow
-from MainMenu.linkedlist import LinkedList
-from MainMenu.Algorithm import merge_sort, quick_sort, bubble_sort
+from DSA.linkedlist import LinkedList
+from DSA.stack import Stack
+from DSA.sorting import merge_sort, quick_sort, bubble_sort
 import pandas as pd
+
 
 class MainWindow(QMainWindow):
     def __init__(self, name=None, *args, **kwargs):
@@ -29,11 +34,12 @@ class MainWindow(QMainWindow):
         UIFunction.labelTitle(self, applicationName)
         UIFunction.initStackTab(self)
         UIFunction.constantFunction(self)
+        self.feedback_stack = Stack()
         self.ui.toodle.clicked.connect(lambda: UIFunction.toodleMenu(self, 160, True))
         self.ui.bn_home.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_home'))
         self.ui.bn_booking.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_booking'))
-        self.ui.bn_android.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_android'))
-        self.ui.bn_schedule.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_cloud'))
+        self.ui.bn_feedback.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_feedback'))
+        self.ui.bn_schedule.clicked.connect(lambda: UIFunction.buttonPressed(self, 'bn_schedule'))
         UIFunction.stackPage(self)
 
         # Load schedule table data
@@ -51,6 +57,15 @@ class MainWindow(QMainWindow):
 
         # Connect the sorting function to the combo box change event
         self.ui.comboBox_sort.currentIndexChanged.connect(self.sort_table)
+        # Connect the event to check for the constraint and update end_Location combo box
+        self.ui.start_Location.currentIndexChanged.connect(self.update_end_location_combobox)
+        # Load graph attributes from file
+        self.load_graph_attributes()
+        # Connect the event to store feedback on pushButton_send click
+        self.ui.pushButton_send.clicked.connect(self.store_feedback)
+
+        self.ui.pushButton.clicked.connect(self.visualize_graph)
+
         self.ui.User_Name.setText(self.name12)
         pixmap = QPixmap('Images/profile.png')
         self.ui.profilePic.setPixmap(pixmap)
@@ -85,7 +100,7 @@ class MainWindow(QMainWindow):
         end_location = self.ui.end_Location.currentText()
 
         if not self.is_valid_route(start_location, end_location):
-            self.show_error_popup("Error", "Invalid route. Please select valid start and end locations.")
+            self.show_error_popup("Error", "No Train Available on this Route")
             self.reset_booking_page()
             return
 
@@ -96,16 +111,12 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentIndex(self.ui.stackedWidget.indexOf(self.ui.page_home))
 
     def is_valid_route(self, start_location, end_location):
-        # Load data from "Train and Timing.csv"
-        schedule_data = pd.read_csv("MainMenu/Database/Train and Time.csv")
+        schedule_data = pd.read_csv("MainMenu/Database/TAT.csv")
 
-        # Check if the start_location is in the "From" column
-        valid_start_location = start_location in schedule_data['From'].values
+        # Check if the pair of start_location and end_location exists
+        valid_route = ((schedule_data['From'] == start_location) & (schedule_data['To'] == end_location)).any()
 
-        # Check if the end_location is in the "To" column
-        valid_end_location = end_location in schedule_data['To'].values
-
-        return valid_start_location and valid_end_location
+        return valid_route
 
     def all_constraints_met(self):
         if self.ui.start_Location.currentText() != self.ui.end_Location.currentText():
@@ -128,12 +139,29 @@ class MainWindow(QMainWindow):
 
     def load_location_comboboxes(self):
         locations_df = pd.read_csv("MainMenu/Database/Locations.csv")
-        locations = locations_df.iloc[:, 0].tolist()[0:]  # Exclude the header
+        locations = locations_df.iloc[:, 0].tolist()[1:]  # Exclude the header
+
+        # Load start_Location combo box
         self.ui.start_Location.addItems(locations)
-        self.ui.end_Location.addItems(locations)
+
+        # Connect the event to dynamically update the end_Location combo box
+        self.ui.start_Location.currentIndexChanged.connect(self.update_end_location_combobox)
+
+    def update_end_location_combobox(self):
+        start_location = self.ui.start_Location.currentText()
+
+        # Load all data from "Train and Time.csv"
+        schedule_data = pd.read_csv("MainMenu/Database/TAT.csv")
+
+        # Filter destinations based on the selected start_location
+        end_locations = schedule_data[schedule_data['From'] == start_location]['To'].tolist()
+
+        # Clear and load the end_Location combo box
+        self.ui.end_Location.clear()
+        self.ui.end_Location.addItems(end_locations)
 
     def load_schedule_table(self):
-        schedule_data = pd.read_csv("MainMenu/Database/Train and Time.csv")
+        schedule_data = pd.read_csv("MainMenu/Database/TAT.csv")
         headers = list(schedule_data.columns)
         data = schedule_data.values.tolist()
 
@@ -206,38 +234,81 @@ class MainWindow(QMainWindow):
         ticket_type = self.ui.comboBox_TicketType.currentText()
         ticket_count = int(self.ui.comboBox_TicketCount.currentText())
 
+        edges = self.load_graph_attributes()
+
         graph = Graph()
-        edges = [
-            ('Lahore', 'Karachi', 5),
-            ('Lahore', 'Quetta', 4),
-            ('Lahore', 'Rawalpindi', 1),
-            ('Quetta', 'Karachi', 3),
-            ('Quetta', 'Multan', 5),
-            ('Lahore', 'Peshawar', 6),
-            ('Karachi', 'Peshawar', 8)
-        ]
 
         for edge in edges:
             graph.add_edge(*edge)
 
-        shortest_path = int(graph.dijkstra(source_location, target_location)) * 200 * ticket_count
+        # Check if the result is 'No Path'
+        dijkstra_result = graph.dijkstra(source_location, target_location)
+        shortest_path = int(dijkstra_result) * 200 * ticket_count
 
         if ticket_type == "Standard":
             shortest_path *= 2 * ticket_count
         elif ticket_type == "Premium":
             shortest_path *= 3 * ticket_count
 
-        if shortest_path == "No Path":
-            self.show_error_popup("Error", "No Destination Found")
+        self.ui.label_Amount.setText(str(shortest_path) + ' PKR')
+
+    def load_graph_attributes(self):
+        try:
+            with open("MainMenu/Database/graphAttributes.txt", "r") as file:
+                lines = file.readlines()
+
+                # Initialize the list to store edges
+                edges = []
+
+                # Parse and add edges to the list
+                for line in lines:
+                    line = line.strip()
+                    if line:
+                        data = line.split(',')
+                        if len(data) == 3:
+                            source = data[0].strip()
+                            destination = data[1].strip()
+                            weight = int(data[2].strip())
+                            edges.append((source, destination, weight))
+
+                # Create a graph and set it as the class attribute
+                self.graph = Graph()
+                for edge in edges:
+                    self.graph.add_edge(*edge)
+
+                return edges
+
+        except FileNotFoundError:
+            print("Error: graphAttributes.txt not found.")
+            return []
+        
+    def visualize_graph(self):
+        if hasattr(self, "graph"):
+            graph_data = self.load_graph_attributes()
+
+            G = nx.DiGraph()
+
+            for edge in graph_data:
+                source, destination, weight = edge
+                G.add_edge(source, destination, weight=weight)
+
+            pos = nx.circular_layout(G)
+            labels = nx.get_edge_attributes(G, "weight")
+
+            nx.draw(G, pos, with_labels=True, node_size=700, node_color="skyblue", font_size=8)
+            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+
+            plt.title("Directed Graph")
+            plt.show()
         else:
-            self.ui.label_Amount.setText(str(shortest_path) + ' PKR')
+            print("Graph not loaded.")
 
     def dialogexec(self, heading, message, icon, btn1, btn2):
         ui_dialog.dialogUi.dialogConstrict(self.diag, heading, message, icon, btn1, btn2)
         self.diag.exec_()
 
     def errorexec(self, heading, icon, btnOk):
-        ui_error.ui_error.errorUi.errorConstrict(self.error, heading, icon, btnOk)
+        ui_error.errorUi.errorConstrict(self.error, heading, icon, btnOk)
         self.error.exec_()
 
     def sort_table(self):
@@ -309,6 +380,24 @@ class MainWindow(QMainWindow):
             data.append(row_data)
         return data
 
+    def store_feedback(self):
+        feedback_text = self.ui.textEdit_feedback.toPlainText()
+
+        if feedback_text:
+            # Insert the feedback at the beginning of the stack
+            self.feedback_stack.insert_at_beginning(feedback_text)
+
+            # Save the feedback stack to a file (feedback.txt)
+            self.save_feedback_to_file()
+
+            # Optionally, clear the textEdit_feedback after storing feedback
+            self.ui.textEdit_feedback.clear()
+
+    def save_feedback_to_file(self):
+        with open("MainMenu/Database/feedback.txt", "w") as file:
+            # Write each feedback to the file, starting from the top of the stack
+            for feedback in self.feedback_stack.display():
+                file.write(feedback + "\n")
 
 def build(name):
     # app = QApplication(sys.argv)

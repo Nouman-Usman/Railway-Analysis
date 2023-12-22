@@ -1,0 +1,8 @@
+Graphs_Atribute
+Lahore,Rawalpindi, 7
+Karachi,Lahore, 9
+Multan,Quetta, 6
+Lahore,Multan, 14
+Peshawar,Rawalpindi, 4
+Quetta,Lahore, 8
+Peshawar,Multan, 4
