@@ -38,7 +38,6 @@ class dialogUi(QDialog):
         pixmap = QtGui.QPixmap(icon)
         self.d.lab_icon.setPixmap(pixmap)
 
-
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
@@ -47,8 +46,8 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QSize(450, 235))
         Dialog.setMaximumSize(QSize(450, 235))
         Dialog.setStyleSheet(u"QDialog {\n"
-                             "	background:rgb(51,51,51);\n"
-                             "}")
+"	background:rgb(51,51,51);\n"
+"}")
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -89,17 +88,17 @@ class Ui_Dialog(object):
         self.bn_min.setMinimumSize(QSize(55, 55))
         self.bn_min.setMaximumSize(QSize(55, 55))
         self.bn_min.setStyleSheet(u"QPushButton {\n"
-                                  "	border: none;\n"
-                                  "	background-color: rgb(51,51,51);\n"
-                                  "}\n"
-                                  "QPushButton:hover {\n"
-                                  "	background-color: rgb(0,143,150);\n"
-                                  "}\n"
-                                  "QPushButton:pressed {	\n"
-                                  "	background-color: rgb(51,51,51);\n"
-                                  "}")
+"	border: none;\n"
+"	background-color: rgb(51,51,51);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(0,143,150);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(51,51,51);\n"
+"}")
         icon = QIcon()
-        icon.addFile(u"icons/1x/hideAsset 53.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"MainMenu/icons/1x/hideAsset 53.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_min.setIcon(icon)
         self.bn_min.setIconSize(QSize(22, 12))
         self.bn_min.setAutoDefault(False)
@@ -112,23 +111,24 @@ class Ui_Dialog(object):
         self.bn_close.setMinimumSize(QSize(55, 55))
         self.bn_close.setMaximumSize(QSize(55, 55))
         self.bn_close.setStyleSheet(u"QPushButton {\n"
-                                    "	border: none;\n"
-                                    "	background-color: rgb(51,51,51);\n"
-                                    "}\n"
-                                    "QPushButton:hover {\n"
-                                    "	background-color: rgb(0,143,150);\n"
-                                    "}\n"
-                                    "QPushButton:pressed {	\n"
-                                    "	background-color: rgb(51,51,51);\n"
-                                    "}")
+"	border: none;\n"
+"	background-color: rgb(51,51,51);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(0,143,150);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	background-color: rgb(51,51,51);\n"
+"}")
         icon1 = QIcon()
-        icon1.addFile(u"icons/1x/closeAsset 43.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"MainMenu/icons/1x/closeAsset 43.png", QSize(), QIcon.Normal, QIcon.Off)
         self.bn_close.setIcon(icon1)
         self.bn_close.setIconSize(QSize(22, 22))
         self.bn_close.setAutoDefault(False)
         self.bn_close.setFlat(True)
 
         self.horizontalLayout.addWidget(self.bn_close)
+
 
         self.verticalLayout_2.addWidget(self.frame_top)
 
@@ -151,19 +151,19 @@ class Ui_Dialog(object):
         font1.setPointSize(12)
         self.bn_east.setFont(font1)
         self.bn_east.setStyleSheet(u"QPushButton {\n"
-                                   "	border: 2px solid rgb(51,51,51);\n"
-                                   "	border-radius: 5px;	\n"
-                                   "	color:rgb(255,255,255);\n"
-                                   "	background-color: rgb(51,51,51);\n"
-                                   "}\n"
-                                   "QPushButton:hover {\n"
-                                   "	border: 2px solid rgb(0,143,150);\n"
-                                   "	background-color: rgb(0,143,150);\n"
-                                   "}\n"
-                                   "QPushButton:pressed {	\n"
-                                   "	border: 2px solid rgb(0,143,150);\n"
-                                   "	background-color: rgb(51,51,51);\n"
-                                   "}")
+"	border: 2px solid rgb(51,51,51);\n"
+"	border-radius: 5px;	\n"
+"	color:rgb(255,255,255);\n"
+"	background-color: rgb(51,51,51);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0,143,150);\n"
+"	background-color: rgb(0,143,150);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0,143,150);\n"
+"	background-color: rgb(51,51,51);\n"
+"}")
         self.bn_east.setAutoDefault(False)
 
         self.gridLayout.addWidget(self.bn_east, 1, 3, 1, 1)
@@ -181,19 +181,19 @@ class Ui_Dialog(object):
         self.bn_west.setMaximumSize(QSize(69, 25))
         self.bn_west.setFont(font1)
         self.bn_west.setStyleSheet(u"QPushButton {\n"
-                                   "	border: 2px solid rgb(51,51,51);\n"
-                                   "	border-radius: 5px;	\n"
-                                   "	color:rgb(255,255,255);\n"
-                                   "	background-color: rgb(51,51,51);\n"
-                                   "}\n"
-                                   "QPushButton:hover {\n"
-                                   "	border: 2px solid rgb(0,143,150);\n"
-                                   "	background-color: rgb(0,143,150);\n"
-                                   "}\n"
-                                   "QPushButton:pressed {	\n"
-                                   "	border: 2px solid rgb(0,143,150);\n"
-                                   "	background-color: rgb(51,51,51);\n"
-                                   "}")
+"	border: 2px solid rgb(51,51,51);\n"
+"	border-radius: 5px;	\n"
+"	color:rgb(255,255,255);\n"
+"	background-color: rgb(51,51,51);\n"
+"}\n"
+"QPushButton:hover {\n"
+"	border: 2px solid rgb(0,143,150);\n"
+"	background-color: rgb(0,143,150);\n"
+"}\n"
+"QPushButton:pressed {	\n"
+"	border: 2px solid rgb(0,143,150);\n"
+"	background-color: rgb(51,51,51);\n"
+"}")
         self.bn_west.setAutoDefault(False)
 
         self.gridLayout.addWidget(self.bn_west, 1, 2, 1, 1)
@@ -206,14 +206,16 @@ class Ui_Dialog(object):
 
         self.gridLayout.addWidget(self.lab_message, 0, 1, 1, 3)
 
+
         self.verticalLayout_2.addWidget(self.frame_bottom)
 
+
         self.verticalLayout.addWidget(self.frame_2)
+
 
         self.retranslateUi(Dialog)
 
         QMetaObject.connectSlotsByName(Dialog)
-
     # setupUi
 
     def retranslateUi(self, Dialog):
@@ -226,3 +228,4 @@ class Ui_Dialog(object):
         self.bn_west.setText("")
         self.lab_message.setText("")
     # retranslateUi
+

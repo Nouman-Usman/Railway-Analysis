@@ -1,59 +1,69 @@
-class Graph():
-    def __init__(self, vertices):
-        self.V = vertices
-        self.graph = [[0 for column in range(vertices)]
-                      for row in range(vertices)]
+import heapq
 
-    def printSolution(self, dist):
-        print("Vertex \t Distance from Source")
-        for node in range(self.V):
-            print(node, "\t\t", dist[node])
 
-    # A utility function to find the vertex with
-    # minimum distance value, from the set of vertices
-    # not yet included in shortest path tree
-    def minDistance(self, dist, sptSet):
+class Graph:
+    def __init__(self):
+        self.edges = {}
 
-        # Initialize minimum distance for next node
-        min = 1e7
+    def add_edge(self, node1, node2, weight):
+        if node1 not in self.edges:
+            self.edges[node1] = []
+        if node2 not in self.edges:
+            self.edges[node2] = []
+        self.edges[node1].append((weight, node2))
+        self.edges[node2].append((weight, node1))
 
-        # Search not nearest vertex not in the
-        # shortest path tree
-        for v in range(self.V):
-            if dist[v] < min and sptSet[v] == False:
-                min = dist[v]
-                min_index = v
+    def dijkstra(self, start, end):
+        queue = [(0, start)]
+        seen = {start: 0}
+        path = {}
 
-        return min_index
+        while queue:
+            (cost, node) = heapq.heappop(queue)
 
-    # Function that implements Dijkstra's single source
-    # shortest path algorithm for a graph represented
-    # using adjacency matrix representation
-    def dijkstra(self, src):
+            if node not in path:
+                path[node] = cost
 
-        dist = [1e7] * self.V
-        dist[src] = 0
-        sptSet = [False] * self.V
+                # Check if the node is in the graph before iterating
+                if node in self.edges:
+                    for weight, neighbour in self.edges[node]:
+                        old_cost = seen.get(neighbour, float('inf'))
+                        new_cost = cost + weight
+                        if new_cost < old_cost:
+                            seen[neighbour] = new_cost
+                            heapq.heappush(queue, (new_cost, neighbour))
 
-        for cout in range(self.V):
+        return path[end] if end in path else "No Path"
 
-            # Pick the minimum distance vertex from
-            # the set of vertices not yet processed.
-            # u is always equal to src in first iteration
-            u = self.minDistance(dist, sptSet)
 
-            # Put the minimum distance vertex in the
-            # shortest path tree
-            sptSet[u] = True
+# Example usage
+graph = Graph()
 
-            # Update dist value of the adjacent vertices
-            # of the picked vertex only if the current
-            # distance is greater than new distance and
-            # the vertex in not in the shortest path tree
-            for v in range(self.V):
-                if (self.graph[u][v] > 0 and
-                        sptSet[v] == False and
-                        dist[v] > dist[u] + self.graph[u][v]):
-                    dist[v] = dist[u] + self.graph[u][v]
+# Modify the locations list based on your "Locations.csv" file
+locations = ['Lahore', 'Karachi', 'Quetta', 'Rawalpindi', 'Multan', 'Peshawar']
 
-        self.printSolution(dist)
+# Add edges
+edges = [
+    ('Lahore', 'Karachi', 5),
+    ('Lahore', 'Quetta', 4),
+    ('Lahore', 'Rawalpindi', 1),
+    ('Quetta', 'Karachi', 3),
+    ('Quetta', 'Multan', 5),
+    ('Lahore', 'Peshawar', 6),
+    ('Karachi', 'Peshawar', 8)
+]
+
+for edge in edges:
+    graph.add_edge(*edge)
+
+# Ensure all locations are present in the graph
+for location in locations:
+    if location not in graph.edges:
+        print(f"Warning: {location} not found in the graph.")
+
+# Now you can use the graph for Dijkstra's algorithm
+# source = 'Rawalpindi'
+# target = 'Karachi'
+# shortest_path = graph.dijkstra(source, target)
+
+# print(f"Shortest path from {source} to {target} is {shortest_path}")
