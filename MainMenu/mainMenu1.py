@@ -11,11 +11,11 @@ from datetime import datetime
 from dateutil import parser
 import networkx as nx
 import matplotlib.pyplot as plt
-from DSA.graph import Graph
+from DSA.Graph import Graph
 from MainMenu import ui_dialog, ui_error
 from MainMenu.ui_function import UIFunction
 from MainMenu.ui_main import Ui_MainWindow
-from DSA.linkedlist import LinkedList
+from DSA.LinkedList import LinkedList
 from DSA.stack import Stack
 from DSA.sorting import merge_sort, quick_sort, bubble_sort
 import pandas as pd
