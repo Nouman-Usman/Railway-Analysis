@@ -70,3 +70,10 @@ pip install -r requirements.txt
 
 [Documentation](https://www.overleaf.com/9715957547dwszqjbqhhkk#78d326)
 
+=======
+<<<<<<< README.md
+After downloading the project using the following command before running the porgram on your local machiene:
+
+pip install -r requirements.txt
+
+>>>>>>> README.md
