@@ -49,7 +49,7 @@ This project was a collaborative effort, and each person mentioned above played 
 
 - [Nouman](https://github.com/Nouman-Usman)
 - [Shahbaz](https://github.com/ShahbazShaddy)
-- [Shahbaz](https://github.com/khuramgill)
+- [Khuram](https://github.com/khuramgill)
 
 
 ## Environment Variables
@@ -68,6 +68,6 @@ pip install -r requirements.txt
 
 ## Documentation
 
-[Documentation](https://www.overleaf.com/9715957547dwszqjbqhhkk#78d326)
+[Documentation](https://www.overleaf.com/read/svpcyjhhhnks#d5f951)
 
 
